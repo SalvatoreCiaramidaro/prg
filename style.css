@@ -1,0 +1,330 @@
+/* CSS Custom Properties per tema chiaro/scuro */
+:root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --text-primary: #212529;
+    --text-secondary: #495057;
+    --border-color: #dee2e6;
+    --table-header-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --table-header-text: #ffffff;
+    --table-row-hover: #f0f4ff;
+    --table-row-alt: #f8f9ff;
+    --navbar-bg: #212529;
+    --navbar-text: #ffffff;
+    --input-bg: #ffffff;
+    --input-border: #ced4da;
+    --focus-color: #0d6efd;
+    --div-bg: #ffffff;
+}
+
+/* Dark Mode */
+html[data-theme="dark"] {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --text-primary: #e8e8e8;
+    --text-secondary: #b0b0b0;
+    --border-color: #404040;
+    --table-header-bg: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+    --table-header-text: #ffffff;
+    --table-row-hover: #3a3f5c;
+    --table-row-alt: #252a3a;
+    --navbar-bg: #0d0d0d;
+    --navbar-text: #e8e8e8;
+    --input-bg: #2d2d2d;
+    --input-border: #404040;
+    --focus-color: #60a5fa;
+    --div-bg: #2d2d2d;
+}
+
+/* Colore del testo personalizzato nel main */
+.ciao {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+/* Evidenzia il tasto attivo nella navbar */
+.nav-item.active .nav-link {
+    color: #fff !important;
+    font-weight: bold;
+    border-bottom: 2px solid #007bff;
+}
+
+/* Stile per i titoli delle sezioni */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary);
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+.img-fluid {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 15px auto;
+    zoom: 50%;
+}
+
+/* 1. Forza l'altezza massima su tutti i livelli gerarchici */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 2. Il contenitore di Vue (#app) deve diventare il "motore" del layout */
+#app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* 100% dell'altezza della finestra del browser */
+}
+
+/* 3. Il main deve "mangiare" tutto lo spazio bianco disponibile */
+main {
+    flex: 1 0 auto; /* Spinge il footer in fondo espandendosi */
+    margin-bottom: 70px; 
+}
+
+/* 4. Il footer rimane alla base */
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #343a40;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    z-index: 1030; /* Assicura che stia sopra ad altri elementi */
+}
+
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.btn-edit {
+    background-color: #d2c920; /* Giallo scuro/Oro */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 10px; /* Spazio a destra */
+    transition: background-color 0.3s; /* Effetto fluido al passaggio del mouse */
+}
+
+.btn-delete {
+    background-color: #dc3545; /* Rosso Bootstrap */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left: 10px; /* Spazio a sinistra */
+    transition: background-color 0.3s;
+}
+
+.btn-edit:hover {
+    background-color: #b5ad1b; /* Si scurisce leggermente al passaggio */
+}
+
+.btn-delete:hover {
+    background-color: #bd2130;
+}
+
+.cerca_giocatori {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid var(--input-border);
+    border-radius: 4px;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    transition: border-color 0.3s ease;
+}
+
+.cerca_giocatori:focus {
+    outline: none;
+    border-color: var(--focus-color);
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
+}
+
+.tabella {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-primary);
+}
+
+.tabella thead {
+    background: var(--table-header-bg);
+    color: var(--table-header-text);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+.tabella th {
+    padding: 18px 15px;
+    text-align: left;
+    border-bottom: 3px solid rgba(102, 126, 234, 0.5);
+}
+
+.tabella td {
+    padding: 15px;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+.tabella tbody tr {
+    transition: all 0.3s ease;
+    background-color: var(--bg-primary);
+}
+
+.tabella tbody tr:nth-child(even) {
+    background-color: var(--table-row-alt);
+}
+
+.tabella tbody tr:hover {
+    background-color: var(--table-row-hover);
+    box-shadow: inset 3px 0 0 0 rgba(102, 126, 234, 0.7);
+    transform: scale(1.01);
+    cursor: pointer;
+}
+
+.tabella tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Dark mode toggle bottone */
+.btn-theme-toggle {
+    background-color: transparent;
+    border: 2px solid var(--navbar-text);
+    color: var(--navbar-text);
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    margin-left: auto;
+    margin-right: 15px;
+}
+
+.btn-theme-toggle:hover {
+    background-color: var(--navbar-text);
+    color: var(--navbar-bg);
+}
+
+.btn-theme-toggle:focus {
+    outline: 2px solid var(--focus-color);
+    outline-offset: 2px;
+}
+
+/* Focus visibile per accessibilità tastiera */
+button:focus-visible,
+input:focus-visible,
+a:focus-visible {
+    outline: 2px solid var(--focus-color);
+    outline-offset: 2px;
+}
+
+/* Stile per input form */
+.form-control {
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    border-color: var(--input-border);
+}
+
+.form-control:focus {
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    border-color: var(--focus-color);
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+/* Navbar a tema */
+.navbar {
+    background-color: var(--navbar-bg) !important;
+}
+
+.navbar-brand,
+.nav-link {
+    color: var(--navbar-text) !important;
+}
+
+/* Stile input-group a tema */
+.input-group .form-control {
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    border-color: var(--input-border);
+    
+}
+
+.input-group .form-control:focus {
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    border-color: var(--focus-color);
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+.input-group .btn-outline-secondary {
+    color: var(--text-primary);
+    border-color: var(--input-border);
+}
+
+.input-group .btn-outline-secondary:hover {
+    background-color: var(--focus-color);
+    border-color: var(--focus-color);
+    color: white;
+}
+
+/* Card a tema */
+.card {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+.card p {
+    color: var(--text-primary);
+}
+
+/* Testo delle tabelle in dark mode */
+.table {
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+}
+
+.table thead {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+.table tbody {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.table tbody td {
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+}
+
+.table tbody tr:nth-child(even) td {
+    background-color: var(--table-row-alt);
+}

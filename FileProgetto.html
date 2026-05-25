@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Il mio Progetto - Alberto Poggiaspalla</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#" @click.prevent="currentView = 'home'" aria-label="Home - Il mio Progetto">Progetto</a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-label="Apri menu navigazione">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item" :class="{ active: currentView === 'info' }">
+                        <a class="nav-link" href="#" @click.prevent="currentView = 'info'" aria-label="Vai a Approfondimento SEO">Approfondimento-1</a>
+                    </li>
+                    <li class="nav-item" :class="{ active: currentView === 'info2' }">
+                        <a class="nav-link" href="#" @click.prevent="currentView = 'info2'" aria-label="Vai ad Approfondimento 2">Approfondimento-2</a>
+                    </li>
+                    <li class="nav-item" :class="{ active: currentView === 'modifica' }">
+                        <a class="nav-link" href="#" @click.prevent="currentView = 'modifica'" aria-label="Vai a Modifica dati utenti">Modifica dati</a>
+                    </li>
+                    <li class="nav-item" :class="{ active: currentView === 'json' }">
+                        <a class="nav-link" href="#" @click.prevent="currentView = 'json'" aria-label="Vai a Database giocatori">Database .json</a>
+                    </li>
+                </ul>
+            </div>
+
+            <button class="btn-theme-toggle" @click="toggleDarkMode" :aria-label="isDarkMode ? 'Passa a modalità chiara (☀️)' : 'Passa a modalità scura (🌙)'">
+                {{ isDarkMode ? '☀️' : '🌙' }}
+            </button>
+        </nav>
+
+        <main class="container mt-5">
+            <div v-if="currentView === 'home'">
+                <h1>Benvenuto!</h1>
+                <p class="ciao">Benvenuto nel progetto per il corso "Fondamenti di sistemi WEB" di Alberto Poggiaspalla.
+                </p>
+                <img src="sfondoFondWeb.webp" alt="Sfondo Fondamenti Web" class="img-fluid rounded shadow"><br><br>
+            </div>
+
+            <div v-if="currentView === 'info'">
+                <h1>Guida Strategica alla Search Engine Optimization (SEO)</h1><br>
+                <h3>Introduzione alla SEO</h3>
+                <p>La <strong>Search Engine Optimization (SEO)</strong> rappresenta l'insieme delle strategie e delle
+                    pratiche volte ad aumentare la visibilità di un sito web sui motori di ricerca (come Google o Bing)
+                    per i risultati non a pagamento, definiti "organici". L'obiettivo principale è migliorare il
+                    posizionamento delle pagine web per parole chiave rilevanti per il proprio business o contenuto.
+                    Questa guida analizza i pilastri fondamentali per una strategia efficace di ottimizzazione.
+                </p><br>
+                <h3>I 3 pilatri fondamentali della SEO:</h3>
+                <h4>1. SEO Tecnica (Technical SEO)</h4>
+                <p>La SEO tecnica riguarda l'ottimizzazione dell'infrastruttura del sito affinché i motori di ricerca
+                    possano scansionare (crawl) e indicizzare i contenuti senza ostacoli.</p>
+                <ul>
+                    <li><strong>Tempo di caricamento:</strong> Siti rapidi migliorano l'esperienza utente e sono
+                        favoriti dagli algoritmi.</li>
+                    <li><strong>Mobile-friendly:</strong> Con l'aumento dell'uso di dispositivi mobili, è essenziale che
+                        il sito sia responsive.</li>
+                    <li><strong>Protocollo HTTPS:</strong>La sicurezza è un fattore di ranking confermato.</li>
+                    <li><strong>Architettura del sito:</strong> Una struttura gerarchica chiara aiuta sia gli utenti che
+                        i bot.</li>
+                </ul><br>
+
+                <h4>2. SEO On-Page (Contenuti e Keyword)</h4>
+                <p>Si riferisce a tutti i fattori interni alle singole pagine che possono essere ottimizzati.</p>
+                <ul>
+                    <li><strong>Link Building</strong>Acquisizione di link da siti esterni autorevoli (backlink) che
+                        puntano al proprio sito.</li>
+                    <li><strong>Segnali Sociali:</strong> Sebbene non siano un fattore di ranking diretto, la
+                        condivisione sui social aumenta la visibilità.</li>
+                    <li><strong>Brand Mentions:</strong> Citazioni del brand online che contribuiscono alla percezione
+                        di autorità.</li>
+                </ul><br>
+
+                <h2>Tabella Comparativa degli Interventi</h2>
+
+                <table class="tabella">
+                    <thead>
+                        <tr>
+                            <th>Tipologia SEO</th>
+                            <th>Obiettivo Principale</th>
+                            <th>Esempio di Attività</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="col-tipo">Tecnica</td>
+                            <td class="col-obiettivo">Facilitare l'indicizzazione</td>
+                            <td class="col-esempio">Ottimizzazione file robots.txt e Sitemap XML</td>
+                        </tr>
+                        <tr>
+                            <td class="col-tipo">On-Page</td>
+                            <td class="col-obiettivo">Pertinenza del contenuto</td>
+                            <td class="col-esempio">Inserimento parole chiave correlate nel testo</td>
+                        </tr>
+                        <tr>
+                            <td class="col-tipo">Off-Page</td>
+                            <td class="col-obiettivo">Aumentare l'autorità</td>
+                            <td class="col-esempio">Guest posting su blog di settore autorevoli</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+
+                <h4>L'Importanza dell'Esperienza Utente (UX)</h4>
+                <p>Negli ultimi anni, Google ha dato sempre più peso ai cosiddetti Core Web Vitals, parametri che misurano la qualità dell'esperienza d'uso di una pagina web: stabilità visiva, interattività e tempo di caricamento del contenuto principale. Un sito SEO-friendly è, prima di tutto, un sito User-friendly.</p>
+                <br>
+
+                <h4>Evoluzione e Trend Futuri</h4>
+                <p>Con l'avvento dell'intelligenza artificiale generativa e di sistemi come SGE (Search Generative Experience), la SEO si sta spostando verso l'ottimizzazione per l'intento di ricerca complesso e la fornitura di risposte dirette. L'autorità dell'autore (E-E-A-T: Experience, Expertise, Authoritativeness, Trustworthiness) diventa un requisito fondamentale per posizionarsi in settori critici come la salute o la finanza.</p>
+            </div>
+
+            <div v-if="currentView === 'info2'">
+                <p>ciao   </p>
+            </div>
+
+            <div v-if="currentView === 'modifica'">
+                <h2>Gestione Utenti</h2>
+                <div class="card p-4 mb-4 shadow-sm">
+                    <input v-model="newUser.username" class="form-control mb-2" placeholder="Username">
+                    <input v-model="newUser.password" class="form-control mb-2" placeholder="Password" type="password">
+                    <input v-model="newUser.cellulare" class="form-control mb-2" placeholder="Cellulare" type="tel">  
+
+                    <button @click="saveUser" class="btn btn-success btn-block">
+                        {{ editIndex === null ? 'Aggiungi Utente' : 'Salva Modifiche' }}
+                    </button>
+
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Username</th>
+                                <th>Password</th>
+                                <th>Cellulare</th>
+                                <th>Azioni</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(user, index) in userList" :key="index">
+                                <td>{{ user.username }}</td>
+                                <td><code>{{ user.password }}</code></td>
+                                <td>{{ user.cellulare }}</td>
+                                <td>
+                                    <button @click="editUser(index)"
+                                        class="btn btn-warning btn-sm">Modifica</button>&nbsp;
+                                    <button @click="deleteUser(index)" class="btn btn-danger btn-sm">Elimina</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div v-if="currentView === 'json'">
+                <h2>Database Giocatori Pallavolo</h2>
+
+                <input type="text" v-model="searchQuery" class="cerca_giocatori" placeholder="Cerca per cognome..." aria-label="Cerca giocatori per cognome">
+
+                <div class="table-responsive">
+                    <table class="table table-hover" role="grid" aria-label="Tabella giocatori pallavolo">
+                        <caption>Elenco dei giocatori di pallavolo con nome, cognome, numero, ruolo, squadra e sesso</caption>
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Cognome</th>
+                                <th scope="col">N°</th>
+                                <th scope="col">Ruolo</th>
+                                <th scope="col">Squadra</th>
+                                <th scope="col">Sesso</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="g in giocatori.filter(item => item.cognome.toLowerCase().includes(searchQuery.toLowerCase()))"
+                                :key="g.id">
+                                <td>{{ g.nome }}</td>
+                                <td>{{ g.cognome }}</td>
+                                <td>{{ g.numero }}</td>
+                                <td>{{ g.ruolo }}</td>
+                                <td>{{ g.squadra_attuale }}</td>
+                                <td>
+                                    <span :class="g.sesso === 'M' ? 'badge badge-primary' : 'badge badge-danger'" :aria-label="g.sesso === 'M' ? 'Maschio' : 'Femmina'">
+                                        {{ g.sesso }}
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+
+        <footer class="bg-dark text-white text-center py-3 mt-5">
+            <div class="container">
+                <span>© 2026 Il Mio Progetto di Alberto Poggiaspalla</span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
