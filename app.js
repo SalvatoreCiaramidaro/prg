@@ -28,7 +28,15 @@ createApp({
 
             // 4. Variabili per i dati PALLAVOLO dal JSON
             giocatori: [],
-            searchQuery: '' // Per il filtro di ricerca dinamico
+            searchQuery: '', // Per il filtro di ricerca dinamico
+
+            // 5. ACCESSIBILITÀ - Pannello e opzioni
+            showAccessibilityPanel: false,
+            fontSizeLevel: parseInt(localStorage.getItem('fontSizeLevel')) || 0,
+            highContrast: localStorage.getItem('highContrast') === 'true',
+            reducedMotion: localStorage.getItem('reducedMotion') === 'true',
+            dyslexiaFont: localStorage.getItem('dyslexiaFont') === 'true',
+            underlineLinks: localStorage.getItem('underlineLinks') === 'true'
         }
     },
     methods: {
@@ -47,6 +55,85 @@ createApp({
                 document.documentElement.removeAttribute('data-theme');
                 localStorage.setItem('theme', 'light');
             }
+        },
+
+        // --- LOGICA ACCESSIBILITÀ ---
+        // Aumenta dimensione font
+        increaseFontSize() {
+            if (this.fontSizeLevel < 3) {
+                this.fontSizeLevel++;
+                this.applyFontSize();
+            }
+        },
+
+        // Diminuisce dimensione font
+        decreaseFontSize() {
+            if (this.fontSizeLevel > 0) {
+                this.fontSizeLevel--;
+                this.applyFontSize();
+            }
+        },
+
+        // Applica la dimensione font al documento
+        applyFontSize() {
+            const root = document.documentElement;
+            if (this.fontSizeLevel === 0) {
+                root.classList.remove('font-size-large', 'font-size-xlarge');
+            } else if (this.fontSizeLevel === 1) {
+                root.classList.add('font-size-large');
+                root.classList.remove('font-size-xlarge');
+            } else if (this.fontSizeLevel >= 2) {
+                root.classList.add('font-size-xlarge');
+            }
+            localStorage.setItem('fontSizeLevel', this.fontSizeLevel);
+        },
+
+        // Toggle Alto Contrasto
+        toggleHighContrast() {
+            this.highContrast = !this.highContrast;
+            if (this.highContrast) {
+                document.documentElement.classList.add('high-contrast');
+            } else {
+                document.documentElement.classList.remove('high-contrast');
+            }
+            localStorage.setItem('highContrast', this.highContrast);
+        },
+
+        // Toggle Riduci Animazioni
+        toggleReducedMotion() {
+            this.reducedMotion = !this.reducedMotion;
+            if (this.reducedMotion) {
+                document.documentElement.classList.add('reduced-motion');
+            } else {
+                document.documentElement.classList.remove('reduced-motion');
+            }
+            localStorage.setItem('reducedMotion', this.reducedMotion);
+        },
+
+        // Toggle Font Dislessia-friendly
+        toggleDyslexiaFont() {
+            this.dyslexiaFont = !this.dyslexiaFont;
+            if (this.dyslexiaFont) {
+                document.documentElement.classList.add('dyslexia-font');
+            } else {
+                document.documentElement.classList.remove('dyslexia-font');
+            }
+            localStorage.setItem('dyslexiaFont', this.dyslexiaFont);
+        },
+
+        // Toggle Sottolinea Link
+        toggleUnderlineLinks() {
+            this.underlineLinks = !this.underlineLinks;
+            if (this.underlineLinks) {
+                const style = document.createElement('style');
+                style.id = 'underline-links-style';
+                style.innerHTML = 'a { text-decoration: underline !important; }';
+                document.head.appendChild(style);
+            } else {
+                const style = document.getElementById('underline-links-style');
+                if (style) style.remove();
+            }
+            localStorage.setItem('underlineLinks', this.underlineLinks);
         },
 
         // --- LOGICA UTENTI ---
@@ -130,6 +217,23 @@ createApp({
         // Applica il tema salvato
         if (this.isDarkMode) {
             document.documentElement.setAttribute('data-theme', 'dark');
+        }
+        // Applica le impostazioni di accessibilità salvate
+        this.applyFontSize();
+        if (this.highContrast) {
+            document.documentElement.classList.add('high-contrast');
+        }
+        if (this.reducedMotion) {
+            document.documentElement.classList.add('reduced-motion');
+        }
+        if (this.dyslexiaFont) {
+            document.documentElement.classList.add('dyslexia-font');
+        }
+        if (this.underlineLinks) {
+            const style = document.createElement('style');
+            style.id = 'underline-links-style';
+            style.innerHTML = 'a { text-decoration: underline !important; }';
+            document.head.appendChild(style);
         }
     }
 }).mount('#app');

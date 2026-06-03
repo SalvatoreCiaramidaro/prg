@@ -1,56 +1,98 @@
+<!-- Dichiarazione del tipo di documento: specifica che il documento è HTML5 -->
 <!DOCTYPE html>
+
+<!-- Tag html con attributo lang="it" per indicare che la lingua del documento è italiana -->
 <html lang="it">
 
+<!-- Sezione head: contiene metadati e risorse per il documento -->
 <head>
+    <!-- Specifica la codifica dei caratteri come UTF-8 (supporta caratteri internazionali) -->
     <meta charset="UTF-8">
+    
+    <!-- Viewport meta tag: rende il sito responsive sui dispositivi mobili, impostando la larghezza e lo zoom iniziale -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Titolo della pagina che appare nella scheda del browser -->
     <title>Il mio Progetto - Alberto Poggiaspalla</title>
 
+    <!-- Importa il framework CSS Bootstrap dalla CDN per styling e layout responsive -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    
+    <!-- Importa le icone Font Awesome dalla CDN per icone vettoriali -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Importa il file CSS personalizzato (style.css) per stili custom del progetto -->
     <link rel="stylesheet" href="style.css">
+    
+    <!-- Importa Vue.js 3 dalla CDN: framework JavaScript per la reattività e gestione dinamica della UI -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 
+<!-- Inizio body: contiene il contenuto visibile della pagina -->
 <body>
+    <!-- Div con id="app": elemento principale dove Vue.js monterà la sua istanza e gestirà la reattività -->
     <div id="app">
+        
+        <!-- Barra di navigazione (navbar) con classe Bootstrap navbar-dark per un tema scuro -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            
+            <!-- Link del brand/logo che quando cliccato torna alla home, @click.prevent previene il comportamento default del link -->
             <a class="navbar-brand" href="#" @click.prevent="currentView = 'home'" aria-label="Home - Il mio Progetto">Progetto</a>
 
+            <!-- Pulsante per il menu toggle su dispositivi mobili, con icona hamburger standard -->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-label="Apri menu navigazione">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
+            <!-- Contenitore collassabile del menu che si espande/collassa su schermi piccoli -->
             <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- Lista di voci di menu con link dinamici -->
                 <ul class="navbar-nav">
+                    
+                    <!-- Voce menu 1: Approfondimento SEO 
+                         :class binding dinamico che aggiunge 'active' quando currentView === 'info' -->
                     <li class="nav-item" :class="{ active: currentView === 'info' }">
                         <a class="nav-link" href="#" @click.prevent="currentView = 'info'" aria-label="Vai a Approfondimento SEO">Approfondimento-1</a>
                     </li>
+                    
+                    <!-- Voce menu 2: Approfondimento 2 con lo stesso meccanismo di attivazione -->
                     <li class="nav-item" :class="{ active: currentView === 'info2' }">
                         <a class="nav-link" href="#" @click.prevent="currentView = 'info2'" aria-label="Vai ad Approfondimento 2">Approfondimento-2</a>
                     </li>
+                    
+                    <!-- Voce menu 3: Modifica dati utenti per gestire il CRUD degli utenti -->
                     <li class="nav-item" :class="{ active: currentView === 'modifica' }">
                         <a class="nav-link" href="#" @click.prevent="currentView = 'modifica'" aria-label="Vai a Modifica dati utenti">Modifica dati</a>
                     </li>
+                    
+                    <!-- Voce menu 4: Database .json per visualizzare i dati dei giocatori da file JSON -->
                     <li class="nav-item" :class="{ active: currentView === 'json' }">
                         <a class="nav-link" href="#" @click.prevent="currentView = 'json'" aria-label="Vai a Database giocatori">Database .json</a>
                     </li>
                 </ul>
             </div>
 
+            <!-- Pulsante personalizzato per toggleare la modalità scura/chiara
+                 @click="toggleDarkMode" chiama la funzione che cambia il tema
+                 Mostra sole (☀️) se in modalità scura, luna (🌙) se in modalità chiara -->
             <button class="btn-theme-toggle" @click="toggleDarkMode" :aria-label="isDarkMode ? 'Passa a modalità chiara (☀️)' : 'Passa a modalità scura (🌙)'">
                 {{ isDarkMode ? '☀️' : '🌙' }}
             </button>
         </nav>
 
+        <!-- Contenitore principale (main) con classe container di Bootstrap per il layout responsivo -->
         <main class="container mt-5">
+            
+            <!-- HOME PAGE: mostrata quando currentView === 'home' usando la direttiva v-if di Vue -->
             <div v-if="currentView === 'home'">
                 <h1>Benvenuto!</h1>
                 <p class="ciao">Benvenuto nel progetto per il corso "Fondamenti di sistemi WEB" di Alberto Poggiaspalla.
                 </p>
+                <!-- Immagine di sfondo responsive con classe img-fluid di Bootstrap -->
                 <img src="sfondoFondWeb.webp" alt="Sfondo Fondamenti Web" class="img-fluid rounded shadow"><br><br>
             </div>
 
+            <!-- PAGINA INFO 1 (SEO): mostrata quando currentView === 'info' -->
             <div v-if="currentView === 'info'">
                 <h1>Guida Strategica alla Search Engine Optimization (SEO)</h1><br>
                 <h3>Introduzione alla SEO</h3>
@@ -60,7 +102,11 @@
                     posizionamento delle pagine web per parole chiave rilevanti per il proprio business o contenuto.
                     Questa guida analizza i pilastri fondamentali per una strategia efficace di ottimizzazione.
                 </p><br>
+                
+                <!-- Sezione dei tre pilastri della SEO -->
                 <h3>I 3 pilatri fondamentali della SEO:</h3>
+                
+                <!-- PILASTRO 1: SEO TECNICA -->
                 <h4>1. SEO Tecnica (Technical SEO)</h4>
                 <p>La SEO tecnica riguarda l'ottimizzazione dell'infrastruttura del sito affinché i motori di ricerca
                     possano scansionare (crawl) e indicizzare i contenuti senza ostacoli.</p>
@@ -74,6 +120,7 @@
                         i bot.</li>
                 </ul><br>
 
+                <!-- PILASTRO 2: SEO ON-PAGE -->
                 <h4>2. SEO On-Page (Contenuti e Keyword)</h4>
                 <p>Si riferisce a tutti i fattori interni alle singole pagine che possono essere ottimizzati.</p>
                 <ul>
@@ -85,9 +132,11 @@
                         di autorità.</li>
                 </ul><br>
 
+                <!-- Tabella comparativa degli interventi SEO -->
                 <h2>Tabella Comparativa degli Interventi</h2>
 
                 <table class="tabella">
+                    <!-- Intestazione della tabella con le colonne principali -->
                     <thead>
                         <tr>
                             <th>Tipologia SEO</th>
@@ -95,17 +144,24 @@
                             <th>Esempio di Attività</th>
                         </tr>
                     </thead>
+                    
+                    <!-- Corpo della tabella con tre righe di dati -->
                     <tbody>
+                        <!-- Riga 1: SEO Tecnica -->
                         <tr>
                             <td class="col-tipo">Tecnica</td>
                             <td class="col-obiettivo">Facilitare l'indicizzazione</td>
                             <td class="col-esempio">Ottimizzazione file robots.txt e Sitemap XML</td>
                         </tr>
+                        
+                        <!-- Riga 2: SEO On-Page -->
                         <tr>
                             <td class="col-tipo">On-Page</td>
                             <td class="col-obiettivo">Pertinenza del contenuto</td>
                             <td class="col-esempio">Inserimento parole chiave correlate nel testo</td>
                         </tr>
+                        
+                        <!-- Riga 3: SEO Off-Page -->
                         <tr>
                             <td class="col-tipo">Off-Page</td>
                             <td class="col-obiettivo">Aumentare l'autorità</td>
@@ -115,33 +171,45 @@
                 </table>
                 <br>
 
+                <!-- Sezione UX e Core Web Vitals -->
                 <h4>L'Importanza dell'Esperienza Utente (UX)</h4>
                 <p>Negli ultimi anni, Google ha dato sempre più peso ai cosiddetti Core Web Vitals, parametri che misurano la qualità dell'esperienza d'uso di una pagina web: stabilità visiva, interattività e tempo di caricamento del contenuto principale. Un sito SEO-friendly è, prima di tutto, un sito User-friendly.</p>
                 <br>
 
+                <!-- Sezione Evolution e trend futuri -->
                 <h4>Evoluzione e Trend Futuri</h4>
                 <p>Con l'avvento dell'intelligenza artificiale generativa e di sistemi come SGE (Search Generative Experience), la SEO si sta spostando verso l'ottimizzazione per l'intento di ricerca complesso e la fornitura di risposte dirette. L'autorità dell'autore (E-E-A-T: Experience, Expertise, Authoritativeness, Trustworthiness) diventa un requisito fondamentale per posizionarsi in settori critici come la salute o la finanza.</p>
             </div>
 
+            <!-- PAGINA INFO 2: per ora vuota, ma strutturata per futuri contenuti -->
             <div v-if="currentView === 'info2'">
                 <p>ciao   </p>
             </div>
 
+            <!-- PAGINA MODIFICA: sezione per la gestione del CRUD degli utenti (Create, Read, Update, Delete) -->
             <div v-if="currentView === 'modifica'">
                 <h2>Gestione Utenti</h2>
+                <!-- Card (riquadro) per l'input di nuovi utenti o modifica di utenti esistenti -->
                 <div class="card p-4 mb-4 shadow-sm">
+                    <!-- Input per Username: v-model bind il valore a newUser.username in Vue -->
                     <input v-model="newUser.username" class="form-control mb-2" placeholder="Username">
+                    <!-- Input per Password: type="password" nasconde il testo inserito -->
                     <input v-model="newUser.password" class="form-control mb-2" placeholder="Password" type="password">
-                    <input v-model="newUser.cellulare" class="form-control mb-2" placeholder="Cellulare" type="tel">  
+                    <!-- Input per Numero Cellulare: type="tel" ottimizza l'input su dispositivi mobili -->
+                    <input v-model="newUser.cellulare" class="form-control mb-2" placeholder="Cellulare" type="tel">  
 
+                    <!-- Pulsante dinamico: mostra "Aggiungi Utente" se editIndex è null (nuovo utente), 
+                         altrimenti "Salva Modifiche" (modifica utente esistente) -->
                     <button @click="saveUser" class="btn btn-success btn-block">
                         {{ editIndex === null ? 'Aggiungi Utente' : 'Salva Modifiche' }}
                     </button>
 
                 </div>
 
+                <!-- Contenitore table-responsive: rende la tabella scrollabile orizzontalmente su schermi piccoli -->
                 <div class="table-responsive">
                     <table class="table table-hover">
+                        <!-- Intestazione della tabella con colonne: Username, Password, Cellulare, Azioni -->
                         <thead class="thead-dark">
                             <tr>
                                 <th>Username</th>
@@ -150,14 +218,24 @@
                                 <th>Azioni</th>
                             </tr>
                         </thead>
+                        
+                        <!-- Corpo della tabella: 
+                             v-for itera su ogni elemento dell'array userList
+                             :key="index" consente a Vue di tracciare ogni elemento per aggiornamenti efficienti -->
                         <tbody>
                             <tr v-for="(user, index) in userList" :key="index">
+                                <!-- Colonna Nome Utente -->
                                 <td>{{ user.username }}</td>
+                                <!-- Colonna Password: mostrata in <code> per evidenziarla visivamente nel codice -->
                                 <td><code>{{ user.password }}</code></td>
+                                <!-- Colonna Numero Cellulare -->
                                 <td>{{ user.cellulare }}</td>
+                                <!-- Colonna Azioni: contiene pulsanti per modifica ed eliminazione -->
                                 <td>
+                                    <!-- Pulsante Modifica (giallo): chiama editUser passando l'indice della riga da modificare -->
                                     <button @click="editUser(index)"
                                         class="btn btn-warning btn-sm">Modifica</button>&nbsp;
+                                    <!-- Pulsante Elimina (rosso): chiama deleteUser passando l'indice della riga da eliminare -->
                                     <button @click="deleteUser(index)" class="btn btn-danger btn-sm">Elimina</button>
                                 </td>
                             </tr>
@@ -166,14 +244,25 @@
                 </div>
             </div>
 
+            <!-- PAGINA DATABASE JSON: sezione per visualizzare e ricercare i giocatori da file dati JSON -->
             <div v-if="currentView === 'json'">
                 <h2>Database Giocatori Pallavolo</h2>
 
+                <!-- Input di ricerca: consente di filtrare i giocatori per cognome in tempo reale
+                     v-model="searchQuery" bind il testo inserito alla variabile Vue searchQuery -->
                 <input type="text" v-model="searchQuery" class="cerca_giocatori" placeholder="Cerca per cognome..." aria-label="Cerca giocatori per cognome">
 
+                <!-- Contenitore responsive: rende la tabella scrollabile orizzontalmente su schermi piccoli -->
                 <div class="table-responsive">
+                    <!-- Tabella con attributi ARIA per migliorare l'accessibilità per screen reader
+                         role="grid" specifica che è una tabella di dati
+                         aria-label descrive lo scopo della tabella -->
                     <table class="table table-hover" role="grid" aria-label="Tabella giocatori pallavolo">
+                        
+                        <!-- <caption> fornisce una descrizione testuale della tabella per screen reader -->
                         <caption>Elenco dei giocatori di pallavolo con nome, cognome, numero, ruolo, squadra e sesso</caption>
+                        
+                        <!-- Intestazione della tabella con colonne: Nome, Cognome, N°, Ruolo, Squadra, Sesso -->
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">Nome</th>
@@ -184,14 +273,29 @@
                                 <th scope="col">Sesso</th>
                             </tr>
                         </thead>
+                        
+                        <!-- Corpo della tabella: 
+                             v-for itera su giocatori.filter() che filtra i dati
+                             .filter(item => item.cognome.toLowerCase().includes(searchQuery.toLowerCase()))
+                             filtra solo giocatori il cui cognome contiene il testo di ricerca (case-insensitive)
+                             :key="g.id" consente a Vue di tracciare ogni elemento per aggiornamenti efficienti -->
                         <tbody>
                             <tr v-for="g in giocatori.filter(item => item.cognome.toLowerCase().includes(searchQuery.toLowerCase()))"
                                 :key="g.id">
+                                <!-- Mostra Nome del giocatore -->
                                 <td>{{ g.nome }}</td>
+                                <!-- Mostra Cognome del giocatore -->
                                 <td>{{ g.cognome }}</td>
+                                <!-- Mostra Numero di maglia del giocatore -->
                                 <td>{{ g.numero }}</td>
+                                <!-- Mostra Ruolo del giocatore (es: palleggiatore, schiacciatore, libero, ecc) -->
                                 <td>{{ g.ruolo }}</td>
+                                <!-- Mostra Squadra attuale del giocatore -->
                                 <td>{{ g.squadra_attuale }}</td>
+                                <!-- Mostra Sesso del giocatore con badge colorato:
+                                     - Blu (badge-primary) se M (Maschio)
+                                     - Rosso (badge-danger) se F (Femmina)
+                                     :class binding condizionale seleziona il colore basato sul valore -->
                                 <td>
                                     <span :class="g.sesso === 'M' ? 'badge badge-primary' : 'badge badge-danger'" :aria-label="g.sesso === 'M' ? 'Maschio' : 'Femmina'">
                                         {{ g.sesso }}
@@ -204,15 +308,73 @@
             </div>
         </main>
 
+        <!-- Footer: sezione finale della pagina con copyright e crediti -->
         <footer class="bg-dark text-white text-center py-3 mt-5">
             <div class="container">
-                <span>© 2026 Il Mio Progetto di Alberto Poggiaspalla</span>
+                <!-- Testo copyright con anno e nomi degli autori del progetto -->
+                <span>© 2026 Progetto di Alberto Poggiaspalla e Salvatore Ciaramidaro</span>
             </div>
         </footer>
+
+        <!-- PULSANTE ACCESSIBILITÀ: in basso a destra della pagina -->
+        <button class="accessibility-btn" @click="showAccessibilityPanel = !showAccessibilityPanel" 
+                aria-label="Apri pannello accessibilità" title="Accessibilità">
+            ♿
+        </button>
+
+        <!-- PANNELLO ACCESSIBILITÀ: banner con opzioni di accessibilità -->
+        <div class="accessibility-panel" :class="{ hidden: !showAccessibilityPanel }">
+            <!-- Pulsante chiudi -->
+            <button class="accessibility-panel-close" @click="showAccessibilityPanel = false" 
+                    aria-label="Chiudi pannello accessibilità">
+                ✕
+            </button>
+
+            <!-- Titolo del pannello -->
+            <h3>⚙️ Accessibilità</h3>
+
+            <!-- OPZIONE 1: Aumenta dimensione font -->
+            <div class="font-size-control">
+                <label>Dimensione testo:</label>
+                <button @click="decreaseFontSize" :disabled="fontSizeLevel <= 0" aria-label="Diminuisci dimensione">-</button>
+                <span class="font-size-value">{{ fontSizeLevel === 0 ? '100%' : (100 + fontSizeLevel * 15) + '%' }}</span>
+                <button @click="increaseFontSize" :disabled="fontSizeLevel >= 3" aria-label="Aumenta dimensione">+</button>
+            </div>
+
+            <!-- OPZIONE 2: Alto contrasto -->
+            <div class="accessibility-option">
+                <input type="checkbox" id="high-contrast" :checked="highContrast" @change="toggleHighContrast">
+                <label for="high-contrast">🎨 Alto Contrasto</label>
+            </div>
+
+            <!-- OPZIONE 3: Riduci animazioni -->
+            <div class="accessibility-option">
+                <input type="checkbox" id="reduced-motion" :checked="reducedMotion" @change="toggleReducedMotion">
+                <label for="reduced-motion">⚡ Riduci Animazioni</label>
+            </div>
+
+            <!-- OPZIONE 4: Font Dislessia-friendly -->
+            <div class="accessibility-option">
+                <input type="checkbox" id="dyslexia-font" :checked="dyslexiaFont" @change="toggleDyslexiaFont">
+                <label for="dyslexia-font">📖 Font Dislessia-friendly</label>
+            </div>
+
+            <!-- OPZIONE 5: Sottolinea link -->
+            <div class="accessibility-option">
+                <input type="checkbox" id="underline-links" :checked="underlineLinks" @change="toggleUnderlineLinks">
+                <label for="underline-links">🔗 Sottolinea Link</label>
+            </div>
+        </div>
     </div>
 
+    <!-- Script jQuery versione slim: libreria JavaScript per manipolazione del DOM (richiesto da Bootstrap) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    
+    <!-- Script Bootstrap JavaScript: contiene funzionalità interattive (modali, dropdown, menu collapsibili, ecc) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Script app.js personalizzato: contiene la logica Vue.js per la gestione completa dell'app 
+         (routing tra pagine, CRUD degli utenti, dark mode toggle, filtri di ricerca, ecc) -->
     <script src="app.js"></script>
 </body>
 

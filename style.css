@@ -328,3 +328,203 @@ a:focus-visible {
 .table tbody tr:nth-child(even) td {
     background-color: var(--table-row-alt);
 }
+
+/* ===== PANNELLO ACCESSIBILITÀ ===== */
+
+/* Pulsante di accesso al pannello accessibilità (in basso a destra) */
+.accessibility-btn {
+    position: fixed;
+    bottom: 70px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 1020;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.accessibility-btn:hover {
+    background-color: #0b5ed7;
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.accessibility-btn:focus-visible {
+    outline: 3px solid #ffc107;
+    outline-offset: 2px;
+}
+
+/* Banner/Panel di accessibilità */
+.accessibility-panel {
+    position: fixed;
+    bottom: 70px;
+    right: 20px;
+    width: 320px;
+    background-color: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    z-index: 1025;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-height: 80vh;
+    overflow-y: auto;
+    transition: all 0.3s ease;
+}
+
+.accessibility-panel.hidden {
+    display: none;
+}
+
+.accessibility-panel h3 {
+    margin: 0 0 15px 0;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+/* Opzione di accessibilità (checkbox/toggle) */
+.accessibility-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: var(--bg-primary);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.accessibility-option:hover {
+    background-color: var(--table-row-hover);
+}
+
+.accessibility-option input[type="checkbox"] {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+}
+
+.accessibility-option label {
+    margin: 0;
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    flex: 1;
+}
+
+/* Controlli per font size */
+.font-size-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background-color: var(--bg-primary);
+    border-radius: 5px;
+}
+
+.font-size-control button {
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.font-size-control button:hover {
+    background-color: #0b5ed7;
+}
+
+.font-size-control button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+.font-size-value {
+    color: var(--text-primary);
+    font-weight: bold;
+    min-width: 40px;
+    text-align: center;
+}
+
+/* Pulsante chiudi panel */
+.accessibility-panel-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-primary);
+    padding: 5px;
+}
+
+.accessibility-panel-close:hover {
+    opacity: 0.7;
+}
+
+/* High Contrast Mode */
+html.high-contrast {
+    --bg-primary: #000000;
+    --bg-secondary: #1a1a1a;
+    --text-primary: #ffff00;
+    --text-secondary: #ffffff;
+    --border-color: #ffff00;
+    --table-header-bg: #000000;
+    --table-header-text: #ffff00;
+    --table-row-hover: #1a1a1a;
+    --table-row-alt: #0d0d0d;
+    --navbar-bg: #000000;
+    --navbar-text: #ffff00;
+    --input-bg: #000000;
+    --input-border: #ffff00;
+    --focus-color: #ffff00;
+}
+
+html.high-contrast body,
+html.high-contrast input,
+html.high-contrast textarea {
+    border: 2px solid #ffff00;
+}
+
+/* Reduced Motion */
+html.reduced-motion,
+html.reduced-motion * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+}
+
+/* Font Size Increase */
+html.font-size-large {
+    font-size: 18px;
+}
+
+html.font-size-xlarge {
+    font-size: 20px;
+}
+
+/* Dyslexia-friendly Font */
+@import url('https://fonts.googleapis.com/css2?family=OpenDyslexic&display=swap');
+
+html.dyslexia-font,
+html.dyslexia-font body,
+html.dyslexia-font * {
+    font-family: 'OpenDyslexic', sans-serif !important;
+}
