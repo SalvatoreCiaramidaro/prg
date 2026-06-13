@@ -78,12 +78,16 @@ createApp({
         applyFontSize() {
             const root = document.documentElement;
             if (this.fontSizeLevel === 0) {
-                root.classList.remove('font-size-large', 'font-size-xlarge');
+                root.classList.remove('font-size-large', 'font-size-xlarge', 'font-size-huge');
             } else if (this.fontSizeLevel === 1) {
                 root.classList.add('font-size-large');
-                root.classList.remove('font-size-xlarge');
-            } else if (this.fontSizeLevel >= 2) {
+                root.classList.remove('font-size-xlarge', 'font-size-huge');
+            } else if (this.fontSizeLevel === 2) {
                 root.classList.add('font-size-xlarge');
+                root.classList.remove('font-size-large', 'font-size-huge');
+            } else if (this.fontSizeLevel >= 3) {
+                root.classList.add('font-size-huge');
+                root.classList.remove('font-size-large', 'font-size-xlarge');
             }
             localStorage.setItem('fontSizeLevel', this.fontSizeLevel);
         },
