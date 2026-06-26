@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
    
     <!-- Titolo della pagina che appare nella scheda del browser -->
-    <title>Il mio Progetto - Alberto Poggiaspalla</title>
+    <title>Il mio Progetto - Alberto Poggiaspalla e Salvatore Ciaramidaro</title>
 
 
     <!-- Importa il framework CSS Bootstrap dalla CDN per styling e layout responsive -->
@@ -29,6 +29,8 @@
    
     <!-- Importa Vue.js 3 dalla CDN: framework JavaScript per la reattività e gestione dinamica della UI -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <script src="https://unpkg.com/vue-router@4/dist/vue-router.global.js"></script>
 </head>
 
 
@@ -38,14 +40,18 @@
     <div id="app">
        
         <!-- Barra di navigazione (navbar) con classe Bootstrap navbar-dark per un tema scuro -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="navigation" aria-label="Menu principale">
            
-            <!-- Link del brand/logo che quando cliccato torna alla home, @click.prevent previene il comportamento default del link -->
-            <a class="navbar-brand" href="#" @click.prevent="currentView = 'home'" aria-label="Home - Il mio Progetto">Progetto</a>
+           <router-link to="/" class="navbar-brand" aria-label="Vai alla Home">Progetto</router-link>
 
 
-            <!-- Pulsante per il menu toggle su dispositivi mobili, con icona hamburger standard -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-label="Apri menu navigazione">
+            <button class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Apri o chiudi il menu di navigazione">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -55,25 +61,28 @@
                 <!-- Lista di voci di menu con link dinamici -->
                 <ul class="navbar-nav">
                    
-                    <!-- Voce menu 1: Approfondimento SEO
-                         :class binding dinamico che aggiunge 'active' quando currentView === 'info' -->
-                    <li class="nav-item" :class="{ active: currentView === 'info' }">
-                        <a class="nav-link" href="#" @click.prevent="currentView = 'info'" aria-label="Vai a Approfondimento SEO">Approfondimento-1</a>
+                    <li class="nav-item" :class="{ active: $route.path === '/info' }">
+                        <router-link class="nav-link" to="/info" aria-label="Vai ad Approfondimento SEO">
+                            Approfondimento-1
+                        </router-link>
                     </li>
-                   
-                    <!-- Voce menu 2: Approfondimento 2 con lo stesso meccanismo di attivazione -->
-                    <li class="nav-item" :class="{ active: currentView === 'info2' }">
-                        <a class="nav-link" href="#" @click.prevent="currentView = 'info2'" aria-label="Vai ad Approfondimento 2">Approfondimento-2</a>
+
+                    <li class="nav-item" :class="{ active: $route.path === '/info2' }">
+                        <router-link class="nav-link" to="/info2" aria-label="Vai ad Approfondimento SEO avanzato">
+                            Approfondimento-2
+                        </router-link>
                     </li>
-                   
-                    <!-- Voce menu 3: Modifica dati utenti per gestire il CRUD degli utenti -->
-                    <li class="nav-item" :class="{ active: currentView === 'modifica' }">
-                        <a class="nav-link" href="#" @click.prevent="currentView = 'modifica'" aria-label="Vai a Modifica dati utenti">Modifica dati</a>
+
+                    <li class="nav-item" :class="{ active: $route.path === '/modifica' }">
+                        <router-link class="nav-link" to="/modifica" aria-label="Vai a Modifica dati utenti">
+                            Modifica dati
+                        </router-link>
                     </li>
-                   
-                    <!-- Voce menu 4: Database .json per visualizzare i dati dei giocatori da file JSON -->
-                    <li class="nav-item" :class="{ active: currentView === 'json' }">
-                        <a class="nav-link" href="#" @click.prevent="currentView = 'json'" aria-label="Vai a Database giocatori">Database .json</a>
+
+                    <li class="nav-item" :class="{ active: $route.path === '/json' }">
+                        <router-link class="nav-link" to="/json" aria-label="Vai a Database giocatori">
+                            Database .json
+                        </router-link>
                     </li>
                 </ul>
             </div>
@@ -89,336 +98,10 @@
 
 
         <!-- Contenitore principale (main) con classe container di Bootstrap per il layout responsivo -->
-        <main class="container mt-5">
-           
-            <!-- HOME PAGE: mostrata quando currentView === 'home' usando la direttiva v-if di Vue -->
-            <div v-if="currentView === 'home'">
-                <h1>Benvenuto!</h1>
-                <p class="ciao">Benvenuto nel progetto per il corso "Fondamenti di sistemi WEB" di Alberto Poggiaspalla e Salvatore Ciaramidaro.
-                </p>
-                <!-- Immagine di sfondo responsive con classe img-fluid di Bootstrap -->
-                <img src="sfondoFondWeb.webp" alt="Sfondo Fondamenti Web" class="img-fluid rounded shadow"><br><br>
-            </div>
+        <main class="container mt-5" role="main">
+            <!-- Componente router-view di Vue.js: qui verranno renderizzate le pagine in base al routing -->
+            <router-view></router-view>
 
-
-            <!-- PAGINA INFO 1 (SEO): mostrata quando currentView === 'info' -->
-            <div v-if="currentView === 'info'">
-                <h1>Guida Strategica alla Search Engine Optimization (SEO)</h1><br>
-                <h3>Introduzione alla SEO</h3>
-                <p>La <strong>Search Engine Optimization (SEO)</strong> rappresenta l'insieme delle strategie e delle
-                    pratiche volte ad aumentare la visibilità di un sito web sui motori di ricerca (come Google o Bing)
-                    per i risultati non a pagamento, definiti "organici". L'obiettivo principale è migliorare il
-                    posizionamento delle pagine web per parole chiave rilevanti per il proprio business o contenuto.
-                    Questa guida analizza i pilastri fondamentali per una strategia efficace di ottimizzazione.
-                </p><br>
-               
-                <!-- Sezione dei tre pilastri della SEO -->
-                <h3>I 3 pilatri fondamentali della SEO:</h3>
-               
-                <!-- PILASTRO 1: SEO TECNICA -->
-                <h4>1. SEO Tecnica (Technical SEO)</h4>
-                <p>La SEO tecnica riguarda l'ottimizzazione dell'infrastruttura del sito affinché i motori di ricerca
-                    possano scansionare (crawl) e indicizzare i contenuti senza ostacoli.</p>
-                <ul>
-                    <li><strong>Tempo di caricamento:</strong> Siti rapidi migliorano l'esperienza utente e sono
-                        favoriti dagli algoritmi.</li>
-                    <li><strong>Mobile-friendly:</strong> Con l'aumento dell'uso di dispositivi mobili, è essenziale che
-                        il sito sia responsive.</li>
-                    <li><strong>Protocollo HTTPS:</strong>La sicurezza è un fattore di ranking confermato.</li>
-                    <li><strong>Architettura del sito:</strong> Una struttura gerarchica chiara aiuta sia gli utenti che
-                        i bot.</li>
-                </ul><br>
-
-
-                <!-- PILASTRO 2: SEO ON-PAGE -->
-                <h4>2. SEO On-Page (Contenuti e Keyword)</h4>
-                <p>Si riferisce a tutti i fattori interni alle singole pagine che possono essere ottimizzati.</p>
-                <ul>
-                    <li><strong>Link Building</strong>Acquisizione di link da siti esterni autorevoli (backlink) che
-                        puntano al proprio sito.</li>
-                    <li><strong>Segnali Sociali:</strong> Sebbene non siano un fattore di ranking diretto, la
-                        condivisione sui social aumenta la visibilità.</li>
-                    <li><strong>Brand Mentions:</strong> Citazioni del brand online che contribuiscono alla percezione
-                        di autorità.</li>
-                </ul><br>
-
-
-                <!-- Tabella comparativa degli interventi SEO -->
-                <h2>Tabella Comparativa degli Interventi</h2>
-
-
-                <table class="tabella">
-                    <!-- Intestazione della tabella con le colonne principali -->
-                    <thead>
-                        <tr>
-                            <th>Tipologia SEO</th>
-                            <th>Obiettivo Principale</th>
-                            <th>Esempio di Attività</th>
-                        </tr>
-                    </thead>
-                   
-                    <!-- Corpo della tabella con tre righe di dati -->
-                    <tbody>
-                        <!-- Riga 1: SEO Tecnica -->
-                        <tr>
-                            <td class="col-tipo">Tecnica</td>
-                            <td class="col-obiettivo">Facilitare l'indicizzazione</td>
-                            <td class="col-esempio">Ottimizzazione file robots.txt e Sitemap XML</td>
-                        </tr>
-                       
-                        <!-- Riga 2: SEO On-Page -->
-                        <tr>
-                            <td class="col-tipo">On-Page</td>
-                            <td class="col-obiettivo">Pertinenza del contenuto</td>
-                            <td class="col-esempio">Inserimento parole chiave correlate nel testo</td>
-                        </tr>
-                       
-                        <!-- Riga 3: SEO Off-Page -->
-                        <tr>
-                            <td class="col-tipo">Off-Page</td>
-                            <td class="col-obiettivo">Aumentare l'autorità</td>
-                            <td class="col-esempio">Guest posting su blog di settore autorevoli</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <br>
-
-
-                <!-- Sezione UX e Core Web Vitals -->
-                <h4>L'Importanza dell'Esperienza Utente (UX)</h4>
-                <p>Negli ultimi anni, Google ha dato sempre più peso ai cosiddetti Core Web Vitals, parametri che misurano la qualità dell'esperienza d'uso di una pagina web: stabilità visiva, interattività e tempo di caricamento del contenuto principale. Un sito SEO-friendly è, prima di tutto, un sito User-friendly.</p>
-                <br>
-
-
-                <!-- Sezione Evolution e trend futuri -->
-                <h4>Evoluzione e Trend Futuri</h4>
-                <p>Con l'avvento dell'intelligenza artificiale generativa e di sistemi come SGE (Search Generative Experience), la SEO si sta spostando verso l'ottimizzazione per l'intento di ricerca complesso e la fornitura di risposte dirette. L'autorità dell'autore (E-E-A-T: Experience, Expertise, Authoritativeness, Trustworthiness) diventa un requisito fondamentale per posizionarsi in settori critici come la salute o la finanza.</p>
-            </div>
-
-
-            <!-- PAGINA INFO 2: per ora vuota, ma strutturata per futuri contenuti -->
-            <div v-if="currentView === 'info2'">
-                <h2>Approfondimento Avanzato: Meccanismi di Scansione, Semantica e Search Intent</h2>
-    <h4>Per comprendere appieno il funzionamento della SEO moderna a livello accademico e professionale, è necessario analizzare come i motori di ricerca gestiscono le proprie risorse computazionali e come interpretano il linguaggio umano al di là delle semplici parole chiave.</h4>
-
-
-    <hr>
-
-
-    <article>
-        <h3>1. Il Crawl Budget (Budget di Scansione)</h3>
-        <p>I motori di ricerca non hanno risorse infinite. Per questo motivo, Google assegna a ogni sito web un <strong>Crawl Budget</strong>: il numero limitato di pagine che il crawler (Googlebot) decide di scansionare in un determinato arco di tempo.</p>
-        <p>Se un sito spreca questo budget, le pagine nuove o aggiornate potrebbero non essere indicizzate per settimane. I fattori principali che determinano il budget sono l'autorità del sito e la velocità di risposta del server.</p>
-       
-        <h6>Sprechi comuni di Crawl Budget:</h6>
-        <ul>
-            <li><strong>Contenuti duplicati:</strong> URL diversi che mostrano la stessa pagina (es. parametri di tracciamento o filtri degli e-commerce).</li>
-            <li><strong>Pagine di errore:</strong> Link interni interrotti che restituiscono un codice di stato HTTP 404.</li>
-            <li><strong>Catene di reindirizzamento:</strong> Pagine che rimandano ad altre pagine tramite codici HTTP 301/302 in successione, rallentando il bot.</li>
-        </ul>
-    </article>
-
-
-    <article>
-        <h3>2. Struttura dei Dati e Web Semantico (Schema.org)</h3>
-        <p>I motori di ricerca sono eccellenti nel leggere il testo, ma faticano a capirne il contesto biologico. I <strong>Dati Strutturati</strong> sono frammenti di codice (solitamente scritti in formato <code>JSON-LD</code>) inseriti nell'HTML per "spiegare" esplicitamente al motore di ricerca cosa c'è nella pagina. Questo vocabolario standardizzato fa capo al progetto globale <strong>Schema.org</strong>.</p>
-       
-        <p><em>Esempio pratico:</em> Se pubblichi una ricetta, per l'algoritmo la stringa "45 minuti" è solo testo. Utilizzando i dati strutturati di Schema.org, puoi etichettare quel testo specificando che si tratta del <code>prepTime</code> (tempo di preparazione).</p>
-        <p>L'uso corretto dei dati strutturati permette a Google di mostrare i <strong>Rich Snippets</strong> (risultati di ricerca arricchiti con recensioni a stelle, prezzi, calorie o date di eventi), aumentando drasticamente il CTR (Click-Through Rate).</p>
-    </article>
-
-
-    <article>
-        <h3>3. L'Evoluzione Semantica: Da "Strings" a "Things"</h3>
-        <p>Nel passato, la SEO si basava sulla <em>keyword density</em> (quante volte una parola appariva nel testo). Oggi Google utilizza algoritmi avanzati di elaborazione del linguaggio naturale (NLP), come BERT e MUM, basati sui Transformer. L'approccio attuale si riassume nel motto di Google: <em>"Search graphs, not strings"</em> (Cerca entità, non stringhe di testo).</p>
-       
-        <ul>
-            <li><strong>Le Entità:</strong> Un'entità è un oggetto o un concetto univoco, ben definito e riconoscibile (una persona, un luogo, un'idea). Google mappa queste entità all'interno del suo <strong>Knowledge Graph</strong> (Grafo della Conoscenza).</li>
-            <li><strong>LSI (Latent Semantic Indexing) e Co-occorrenza:</strong> L'algoritmo capisce la qualità di un testo analizzando la presenza di parole correlate che dovrebbero logicamente apparire in quel contesto. Se una pagina parla di "Apple" intesa come azienda, l'algoritmo si aspetta di trovare termini come "computer", "smartphone", "Steve Jobs" o "titoli azionari", escludendo così il significato legato al frutto.</li>
-        </ul>
-    </article>
-
-
-    <article>
-        <h3>4. La Decostruzione del Search Intent (Intento di Ricerca)</h3>
-        <p>Gli utenti non cercano tutti allo stesso modo. L'ottimizzazione moderna richiede la mappatura precisa dei contenuti in base a quattro macro-categorie di intento, che determinano il tipo di pagina da progettare:</p>
-       
-        <div class="table-responsive">
-            <table class="table table-bordered table-striped">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>Tipo di Intento</th>
-                        <th>Obiettivo dell'Utente</th>
-                        <th>Tipo di Pagina Ideale</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Informazionale</strong></td>
-                        <td>Trovare una risposta a una domanda (es. <em>"come funziona un cookie"</em>)</td>
-                        <td>Articolo di blog, guida dettagliata, FAQ.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Navigazionale</strong></td>
-                        <td>Raggiungere un sito specifico di cui si conosce il brand (es. <em>"Facebook login"</em>)</td>
-                        <td>Homepage, landing page ufficiale del brand.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Commerciale</strong></td>
-                        <td>Investigare su prodotti o servizi prima dell'acquisto (es. <em>"miglior smartphone"</em>)</td>
-                        <td>Guide comparative, recensioni, liste "top 10".</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Transazionale</strong></td>
-                        <td>Compiere un'azione economica immediata (es. <em>"compra biglietti concerto"</em>)</td>
-                        <td>Pagina prodotto di un e-commerce, form di prenotazione.</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <p class="text-muted small">Sbagliare l'intento significa fallire il posizionamento: tentare di posizionare una pagina e-commerce puramente transazionale per una query di tipo informazionale è oggi inefficace, poiché Google privilegerà sempre i formati editoriali.</p>
-    </article>
-
-
-    <article >
-        <h3>5. SEO Internazionale e Gestione della Geolocalizzazione</h3>
-        <p>Quando un progetto web si espande su più mercati o lingue, entrano in gioco direttive tecniche specifiche per evitare che i motori di ricerca scambino le traduzioni per contenuti duplicati.</p>
-       
-        <ul>
-            <li><strong>Attributo <code>rel="alternate" hreflang="..."</code>:</strong> È un tag HTML inserito nell'<code>&lt;head&gt;</code> della pagina che indica a Google a quale specifica lingua e area geografica è destinato quel preciso URL. <br>
-            <em>Esempio:</em> <code>&lt;link rel="alternate" hreflang="en-us" href="https://example.com/us/" /&gt;</code> dice a Googlebot di mostrare quella versione solo agli utenti negli Stati Uniti.</li>
-            <li><strong>Geolocalizzazione dell'infrastruttura:</strong> La scelta strategica tra l'uso di domini nazionali (ccTLD come <code>.it</code>, <code>.de</code>), sottodomini (<code>it.example.com</code>) o sottocartelle (<code>example.com/it/</code>) influisce profondamente sulla velocità di propagazione dell'autorità del dominio globale verso le sezioni locali.</li>
-        </ul>
-    </article>
-            </div>
-
-
-            <!-- PAGINA MODIFICA: sezione per la gestione del CRUD degli utenti (Create, Read, Update, Delete) -->
-            <div v-if="currentView === 'modifica'">
-                <h2>Gestione Utenti</h2>
-                <!-- Card (riquadro) per l'input di nuovi utenti o modifica di utenti esistenti -->
-                <div class="card p-4 mb-4 shadow-sm">
-                    <!-- Input per Username: v-model bind il valore a newUser.username in Vue -->
-                    <input v-model="newUser.username" class="form-control mb-2" placeholder="Username">
-                    <!-- Input per Password: type="password" nasconde il testo inserito -->
-                    <input v-model="newUser.password" class="form-control mb-2" placeholder="Password" type="password">
-                    <!-- Input per Numero Cellulare: type="tel" ottimizza l'input su dispositivi mobili -->
-                    <input v-model="newUser.cellulare" class="form-control mb-2" placeholder="Cellulare" type="tel">  
-
-
-                    <!-- Pulsante dinamico: mostra "Aggiungi Utente" se editIndex è null (nuovo utente),
-                         altrimenti "Salva Modifiche" (modifica utente esistente) -->
-                    <button @click="saveUser" class="btn btn-success btn-block">
-                        {{ editIndex === null ? 'Aggiungi Utente' : 'Salva Modifiche' }}
-                    </button>
-
-
-                </div>
-
-
-                <!-- Contenitore table-responsive: rende la tabella scrollabile orizzontalmente su schermi piccoli -->
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <!-- Intestazione della tabella con colonne: Username, Password, Cellulare, Azioni -->
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>Username</th>
-                                <th>Password</th>
-                                <th>Cellulare</th>
-                                <th>Azioni</th>
-                            </tr>
-                        </thead>
-                       
-                        <!-- Corpo della tabella:
-                             v-for itera su ogni elemento dell'array userList
-                             :key="index" consente a Vue di tracciare ogni elemento per aggiornamenti efficienti -->
-                        <tbody>
-                            <tr v-for="(user, index) in userList" :key="index">
-                                <!-- Colonna Nome Utente -->
-                                <td>{{ user.username }}</td>
-                                <!-- Colonna Password: mostrata in <code> per evidenziarla visivamente nel codice -->
-                                <td><code>{{ user.password }}</code></td>
-                                <!-- Colonna Numero Cellulare -->
-                                <td>{{ user.cellulare }}</td>
-                                <!-- Colonna Azioni: contiene pulsanti per modifica ed eliminazione -->
-                                <td>
-                                    <!-- Pulsante Modifica (giallo): chiama editUser passando l'indice della riga da modificare -->
-                                    <button @click="editUser(index)"
-                                        class="btn btn-warning btn-sm">Modifica</button>&nbsp;
-                                    <!-- Pulsante Elimina (rosso): chiama deleteUser passando l'indice della riga da eliminare -->
-                                    <button @click="deleteUser(index)" class="btn btn-danger btn-sm">Elimina</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-
-            <!-- PAGINA DATABASE JSON: sezione per visualizzare e ricercare i giocatori da file dati JSON -->
-            <div v-if="currentView === 'json'">
-                <h2>Database Giocatori Pallavolo</h2>
-
-
-                <!-- Input di ricerca: consente di filtrare i giocatori per cognome in tempo reale
-                     v-model="searchQuery" bind il testo inserito alla variabile Vue searchQuery -->
-                <input type="text" v-model="searchQuery" class="cerca_giocatori" placeholder="Cerca per cognome..." aria-label="Cerca giocatori per cognome">
-
-
-                <!-- Contenitore responsive: rende la tabella scrollabile orizzontalmente su schermi piccoli -->
-                <div class="table-responsive">
-                    <!-- Tabella con attributi ARIA per migliorare l'accessibilità per screen reader
-                         role="grid" specifica che è una tabella di dati
-                         aria-label descrive lo scopo della tabella -->
-                    <table class="table table-hover" role="grid" aria-label="Tabella giocatori pallavolo">
-                       
-                        <!-- <caption> fornisce una descrizione testuale della tabella per screen reader -->
-                        <caption>Elenco dei giocatori di pallavolo con nome, cognome, numero, ruolo, squadra e sesso</caption>
-                       
-                        <!-- Intestazione della tabella con colonne: Nome, Cognome, N°, Ruolo, Squadra, Sesso -->
-                        <thead class="thead-dark">
-                            <tr>
-                                <th scope="col">Nome</th>
-                                <th scope="col">Cognome</th>
-                                <th scope="col">N°</th>
-                                <th scope="col">Ruolo</th>
-                                <th scope="col">Squadra</th>
-                                <th scope="col">Sesso</th>
-                            </tr>
-                        </thead>
-                       
-                        <!-- Corpo della tabella:
-                             v-for itera su giocatori.filter() che filtra i dati
-                             .filter(item => item.cognome.toLowerCase().includes(searchQuery.toLowerCase()))
-                             filtra solo giocatori il cui cognome contiene il testo di ricerca (case-insensitive)
-                             :key="g.id" consente a Vue di tracciare ogni elemento per aggiornamenti efficienti -->
-                        <tbody>
-                            <tr v-for="g in giocatori.filter(item => item.cognome.toLowerCase().includes(searchQuery.toLowerCase()))"
-                                :key="g.id">
-                                <!-- Mostra Nome del giocatore -->
-                                <td>{{ g.nome }}</td>
-                                <!-- Mostra Cognome del giocatore -->
-                                <td>{{ g.cognome }}</td>
-                                <!-- Mostra Numero di maglia del giocatore -->
-                                <td>{{ g.numero }}</td>
-                                <!-- Mostra Ruolo del giocatore (es: palleggiatore, schiacciatore, libero, ecc) -->
-                                <td>{{ g.ruolo }}</td>
-                                <!-- Mostra Squadra attuale del giocatore -->
-                                <td>{{ g.squadra_attuale }}</td>
-                                <!-- Mostra Sesso del giocatore con badge colorato:
-                                     - Blu (badge-primary) se M (Maschio)
-                                     - Rosso (badge-danger) se F (Femmina)
-                                     :class binding condizionale seleziona il colore basato sul valore -->
-                                <td>
-                                    <span :class="g.sesso === 'M' ? 'badge badge-primary' : 'badge badge-danger'" :aria-label="g.sesso === 'M' ? 'Maschio' : 'Femmina'">
-                                        {{ g.sesso }}
-                                    </span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
         </main>
 
 
@@ -432,56 +115,61 @@
 
 
         <!-- PULSANTE ACCESSIBILITÀ: in basso a destra della pagina -->
-        <button class="accessibility-btn" @click="showAccessibilityPanel = !showAccessibilityPanel"
-                aria-label="Apri pannello accessibilità" title="Accessibilità">
+        <button class="accessibility-btn"
+                @click="showAccessibilityPanel = !showAccessibilityPanel"
+                :aria-expanded="showAccessibilityPanel.toString()"
+                aria-controls="accessibility-panel"
+                aria-label="Apri pannello accessibilità"
+                title="Accessibilità">
             ♿
         </button>
 
 
         <!-- PANNELLO ACCESSIBILITÀ: banner con opzioni di accessibilità -->
-        <div class="accessibility-panel" :class="{ hidden: !showAccessibilityPanel }">
-            <!-- Pulsante chiudi -->
-            <button class="accessibility-panel-close" @click="showAccessibilityPanel = false"
+        <div id="accessibility-panel"
+             class="accessibility-panel"
+             :class="{ hidden: !showAccessibilityPanel }"
+             :aria-hidden="(!showAccessibilityPanel).toString()"
+             role="dialog"
+             aria-label="Opzioni di accessibilità">
+
+            <button class="accessibility-panel-close"
+                    @click="showAccessibilityPanel = false"
                     aria-label="Chiudi pannello accessibilità">
                 ✕
             </button>
 
-
-            <!-- Titolo del pannello -->
             <h3>⚙️ Accessibilità</h3>
 
-
-            <!-- OPZIONE 1: Aumenta dimensione font -->
             <div class="font-size-control">
-                <label>Dimensione testo:</label>
-                <button @click="decreaseFontSize" :disabled="fontSizeLevel <= 0" aria-label="Diminuisci dimensione">-</button>
-                <span class="font-size-value">{{ fontSizeLevel === 0 ? '100%' : (100 + fontSizeLevel * 15) + '%' }}</span>
-                <button @click="increaseFontSize" :disabled="fontSizeLevel >= 3" aria-label="Aumenta dimensione">+</button>
+                <span id="font-label">Dimensione testo:</span>
+                <button @click="decreaseFontSize"
+                        :disabled="fontSizeLevel <= 0"
+                        aria-label="Diminuisci dimensione del testo">-</button>
+                <!-- aria-live="polite": annuncia il cambiamento agli screen reader -->
+                <span class="font-size-value" aria-live="polite" aria-labelledby="font-label">
+                    {{ fontSizeLevel === 0 ? '100%' : (100 + fontSizeLevel * 15) + '%' }}
+                </span>
+                <button @click="increaseFontSize"
+                        :disabled="fontSizeLevel >= 3"
+                        aria-label="Aumenta dimensione del testo">+</button>
             </div>
 
-
-            <!-- OPZIONE 2: Alto contrasto -->
             <div class="accessibility-option">
                 <input type="checkbox" id="high-contrast" :checked="highContrast" @change="toggleHighContrast">
                 <label for="high-contrast">🎨 Alto Contrasto</label>
             </div>
 
-
-            <!-- OPZIONE 3: Riduci animazioni -->
             <div class="accessibility-option">
                 <input type="checkbox" id="reduced-motion" :checked="reducedMotion" @change="toggleReducedMotion">
                 <label for="reduced-motion">⚡ Riduci Animazioni</label>
             </div>
 
-
-            <!-- OPZIONE 4: Font Dislessia-friendly -->
             <div class="accessibility-option">
                 <input type="checkbox" id="dyslexia-font" :checked="dyslexiaFont" @change="toggleDyslexiaFont">
                 <label for="dyslexia-font">📖 Font Dislessia-friendly</label>
             </div>
 
-
-            <!-- OPZIONE 5: Sottolinea link -->
             <div class="accessibility-option">
                 <input type="checkbox" id="underline-links" :checked="underlineLinks" @change="toggleUnderlineLinks">
                 <label for="underline-links">🔗 Sottolinea Link</label>
@@ -499,6 +187,9 @@
     <!-- Script app.js personalizzato: contiene la logica Vue.js per la gestione completa dell'app
          (routing tra pagine, CRUD degli utenti, dark mode toggle, filtri di ricerca, ecc) -->
     <script src="app.js"></script>
+
+
+    
 </body>
 
 
