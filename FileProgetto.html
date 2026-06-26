@@ -1,153 +1,100 @@
-<!-- Dichiarazione del tipo di documento: specifica che il documento è HTML5 -->
 <!DOCTYPE html>
-
-
-<!-- Tag html con attributo lang="it" per indicare che la lingua del documento è italiana -->
 <html lang="it">
-
-
-<!-- Sezione head: contiene metadati e risorse per il documento -->
 <head>
-    <!-- Specifica la codifica dei caratteri come UTF-8 (supporta caratteri internazionali) -->
     <meta charset="UTF-8">
-   
-    <!-- Viewport meta tag: rende il sito responsive sui dispositivi mobili, impostando la larghezza e lo zoom iniziale -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   
-    <!-- Titolo della pagina che appare nella scheda del browser -->
     <title>Il mio Progetto - Alberto Poggiaspalla e Salvatore Ciaramidaro</title>
 
-
-    <!-- Importa il framework CSS Bootstrap dalla CDN per styling e layout responsive -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-   
-    <!-- Importa le icone Font Awesome dalla CDN per icone vettoriali -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-   
-    <!-- Importa il file CSS personalizzato (style.css) per stili custom del progetto -->
     <link rel="stylesheet" href="style.css">
    
-    <!-- Importa Vue.js 3 dalla CDN: framework JavaScript per la reattività e gestione dinamica della UI -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-
     <script src="https://unpkg.com/vue-router@4/dist/vue-router.global.js"></script>
 </head>
-
-
-<!-- Inizio body: contiene il contenuto visibile della pagina -->
 <body>
-    <!-- Div con id="app": elemento principale dove Vue.js monterà la sua istanza e gestirà la reattività -->
     <div id="app">
+        <a href="#main-content" class="sr-only sr-only-focusable">Salta al contenuto principale</a>
        
-        <!-- Barra di navigazione (navbar) con classe Bootstrap navbar-dark per un tema scuro -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="navigation" aria-label="Menu principale">
-           
-           <router-link to="/" class="navbar-brand" aria-label="Vai alla Home">Progetto</router-link>
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Menu principale">
+                <router-link to="/" class="navbar-brand" aria-label="Vai alla Home">Progetto</router-link>
 
+                <button class="navbar-toggler"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#navbarNav"
+                        aria-controls="navbarNav"
+                        aria-expanded="false"
+                        aria-label="Apri o chiudi il menu di navigazione">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-            <button class="navbar-toggler"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#navbarNav"
-                    aria-controls="navbarNav"
-                    aria-expanded="false"
-                    aria-label="Apri o chiudi il menu di navigazione">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item" :class="{ active: $route.path === '/info' }">
+                            <router-link class="nav-link" to="/info">Approfondimento-1</router-link>
+                        </li>
+                        <li class="nav-item" :class="{ active: $route.path === '/info2' }">
+                            <router-link class="nav-link" to="/info2">Approfondimento-2</router-link>
+                        </li>
+                        <li class="nav-item" :class="{ active: $route.path === '/modifica' }">
+                            <router-link class="nav-link" to="/modifica">Modifica dati</router-link>
+                        </li>
+                        <li class="nav-item" :class="{ active: $route.path === '/json' }">
+                            <router-link class="nav-link" to="/json">Database .json</router-link>
+                        </li>
+                    </ul>
+                </div>
 
+                <button class="btn-theme-toggle" 
+                        @click="toggleDarkMode" 
+                        :aria-label="isDarkMode ? 'Passa a modalità chiara' : 'Passa a modalità scura'">
+                    <span aria-hidden="true">{{ isDarkMode ? '☀️' : '🌙' }}</span>
+                </button>
+            </nav>
+        </header>
 
-            <!-- Contenitore collassabile del menu che si espande/collassa su schermi piccoli -->
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <!-- Lista di voci di menu con link dinamici -->
-                <ul class="navbar-nav">
-                   
-                    <li class="nav-item" :class="{ active: $route.path === '/info' }">
-                        <router-link class="nav-link" to="/info" aria-label="Vai ad Approfondimento SEO">
-                            Approfondimento-1
-                        </router-link>
-                    </li>
-
-                    <li class="nav-item" :class="{ active: $route.path === '/info2' }">
-                        <router-link class="nav-link" to="/info2" aria-label="Vai ad Approfondimento SEO avanzato">
-                            Approfondimento-2
-                        </router-link>
-                    </li>
-
-                    <li class="nav-item" :class="{ active: $route.path === '/modifica' }">
-                        <router-link class="nav-link" to="/modifica" aria-label="Vai a Modifica dati utenti">
-                            Modifica dati
-                        </router-link>
-                    </li>
-
-                    <li class="nav-item" :class="{ active: $route.path === '/json' }">
-                        <router-link class="nav-link" to="/json" aria-label="Vai a Database giocatori">
-                            Database .json
-                        </router-link>
-                    </li>
-                </ul>
-            </div>
-
-
-            <!-- Pulsante personalizzato per toggleare la modalità scura/chiara
-                 @click="toggleDarkMode" chiama la funzione che cambia il tema
-                 Mostra sole (☀️) se in modalità scura, luna (🌙) se in modalità chiara -->
-            <button class="btn-theme-toggle" @click="toggleDarkMode" :aria-label="isDarkMode ? 'Passa a modalità chiara (☀️)' : 'Passa a modalità scura (🌙)'">
-                {{ isDarkMode ? '☀️' : '🌙' }}
-            </button>
-        </nav>
-
-
-        <!-- Contenitore principale (main) con classe container di Bootstrap per il layout responsivo -->
-        <main class="container mt-5" role="main">
-            <!-- Componente router-view di Vue.js: qui verranno renderizzate le pagine in base al routing -->
+        <main id="main-content" class="container mt-5">
             <router-view></router-view>
-
         </main>
 
-
-        <!-- Footer: sezione finale della pagina con copyright e crediti -->
         <footer class="bg-dark text-white text-center py-3 mt-5">
             <div class="container">
-                <!-- Testo copyright con anno e nomi degli autori del progetto -->
-                <span>© 2026 Progetto di Alberto Poggiaspalla e Salvatore Ciaramidaro</span>
+                <p class="mb-0">© 2026 Progetto di Alberto Poggiaspalla e Salvatore Ciaramidaro</p>
             </div>
         </footer>
 
-
-        <!-- PULSANTE ACCESSIBILITÀ: in basso a destra della pagina -->
         <button class="accessibility-btn"
                 @click="showAccessibilityPanel = !showAccessibilityPanel"
                 :aria-expanded="showAccessibilityPanel.toString()"
                 aria-controls="accessibility-panel"
                 aria-label="Apri pannello accessibilità"
                 title="Accessibilità">
-            ♿
+            <span aria-hidden="true">♿</span>
         </button>
 
-
-        <!-- PANNELLO ACCESSIBILITÀ: banner con opzioni di accessibilità -->
         <div id="accessibility-panel"
              class="accessibility-panel"
              :class="{ hidden: !showAccessibilityPanel }"
              :aria-hidden="(!showAccessibilityPanel).toString()"
-             role="dialog"
+             role="region"
              aria-label="Opzioni di accessibilità">
 
             <button class="accessibility-panel-close"
                     @click="showAccessibilityPanel = false"
                     aria-label="Chiudi pannello accessibilità">
-                ✕
+                <span aria-hidden="true">✕</span>
             </button>
 
-            <h3>⚙️ Accessibilità</h3>
+            <h2>⚙️ Accessibilità</h2>
 
             <div class="font-size-control">
                 <span id="font-label">Dimensione testo:</span>
                 <button @click="decreaseFontSize"
                         :disabled="fontSizeLevel <= 0"
                         aria-label="Diminuisci dimensione del testo">-</button>
-                <!-- aria-live="polite": annuncia il cambiamento agli screen reader -->
-                <span class="font-size-value" aria-live="polite" aria-labelledby="font-label">
+                <span class="font-size-value" aria-live="polite" aria-atomic="true" aria-labelledby="font-label">
                     {{ fontSizeLevel === 0 ? '100%' : (100 + fontSizeLevel * 15) + '%' }}
                 </span>
                 <button @click="increaseFontSize"
@@ -177,20 +124,8 @@
         </div>
     </div>
 
-
-    <!-- Script jQuery versione slim: libreria JavaScript per manipolazione del DOM (richiesto da Bootstrap) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-   
-    <!-- Script Bootstrap JavaScript: contiene funzionalità interattive (modali, dropdown, menu collapsibili, ecc) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-   
-    <!-- Script app.js personalizzato: contiene la logica Vue.js per la gestione completa dell'app
-         (routing tra pagine, CRUD degli utenti, dark mode toggle, filtri di ricerca, ecc) -->
     <script src="app.js"></script>
-
-
-    
 </body>
-
-
 </html>

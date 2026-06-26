@@ -5,12 +5,10 @@ const { createRouter, createWebHashHistory } = VueRouter;
 
 const HomeView = {
     template: `
-        <div>
+        <div class="mb-5">
             <h1>Benvenuto!</h1>
-            <p class="ciao">Benvenuto nel progetto per il corso "Fondamenti di sistemi WEB" di Alberto Poggiaspalla e Salvatore Ciaramidaro.
-            </p>
-            <!-- Immagine di sfondo responsive con classe img-fluid di Bootstrap -->
-            <img src="sfondoFondWeb.webp" alt="Sfondo Fondamenti Web" class="img-fluid rounded shadow"><br><br>
+            <p class="ciao">Benvenuto nel progetto per il corso "Fondamenti di sistemi WEB" di Alberto Poggiaspalla e Salvatore Ciaramidaro.</p>
+            <img src="sfondoFondWeb.webp" alt="Illustrazione concettuale di una rete di nodi, server e computer interconnessi" class="img-fluid rounded shadow mb-4">
         </div>
     `
 };
@@ -20,81 +18,85 @@ const InfoView = {
     template: `
         <div>
             <h1>Guida Strategica alla Search Engine Optimization (SEO)</h1>
-            <br>
-            <h3>Introduzione alla SEO</h3>
-            <p>La <strong>Search Engine Optimization (SEO)</strong> rappresenta l'insieme delle strategie e delle
-                pratiche volte ad aumentare la visibilità di un sito web sui motori di ricerca (come Google o Bing)
-                per i risultati non a pagamento, definiti "organici". L'obiettivo principale è migliorare il
-                posizionamento delle pagine web per parole chiave rilevanti per il proprio business o contenuto.
-                Questa guida analizza i pilastri fondamentali per una strategia efficace di ottimizzazione.
-            </p>
-            <br>
+            <div class="mt-4">
+                <h2>Introduzione alla SEO</h2>
+                <p>La <strong>Search Engine Optimization (SEO)</strong> rappresenta l'insieme delle strategie e delle
+                    pratiche volte ad aumentare la visibilità di un sito web sui motori di ricerca (come Google o Bing)
+                    per i risultati non a pagamento, definiti "organici". L'obiettivo principale è migliorare il
+                    posizionamento delle pagine web per parole chiave rilevanti per il proprio business o contenuto.
+                    Questa guida analizza i pilastri fondamentali per una strategia efficace di ottimizzazione.
+                </p>
+            </div>
 
-            <h3>I 3 pilastri fondamentali della SEO:</h3>
+            <div class="mt-4">
+                <h2>I 3 pilastri fondamentali della SEO:</h2>
 
-            <h4>1. SEO Tecnica (Technical SEO)</h4>
-            <p>La SEO tecnica riguarda l'ottimizzazione dell'infrastruttura del sito affinché i motori di ricerca
-                possano scansionare (crawl) e indicizzare i contenuti senza ostacoli.</p>
-            <ul>
-                <li><strong>Tempo di caricamento:</strong> Siti rapidi migliorano l'esperienza utente e sono favoriti dagli algoritmi.</li>
-                <li><strong>Mobile-friendly:</strong> Con l'aumento dell'uso di dispositivi mobili, è essenziale che il sito sia responsive.</li>
-                <li><strong>Protocollo HTTPS:</strong> La sicurezza è un fattore di ranking confermato.</li>
-                <li><strong>Architettura del sito:</strong> Una struttura gerarchica chiara aiuta sia gli utenti che i bot.</li>
-            </ul>
-            <br>
+                <h3>1. SEO Tecnica (Technical SEO)</h3>
+                <p>La SEO tecnica riguarda l'ottimizzazione dell'infrastruttura del sito affinché i motori di ricerca
+                    possano scansionare (crawl) e indicizzare i contenuti senza ostacoli.</p>
+                <ul>
+                    <li><strong>Tempo di caricamento:</strong> Siti rapidi migliorano l'esperienza utente e sono favoriti dagli algoritmi.</li>
+                    <li><strong>Mobile-friendly:</strong> Con l'aumento dell'uso di dispositivi mobili, è essenziale che il sito sia responsive.</li>
+                    <li><strong>Protocollo HTTPS:</strong> La sicurezza è un fattore di ranking confermato.</li>
+                    <li><strong>Architettura del sito:</strong> Una struttura gerarchica chiara aiuta sia gli utenti che i bot.</li>
+                </ul>
+            </div>
 
-            <h4>2. SEO On-Page (Contenuti e Keyword)</h4>
-            <p>Si riferisce a tutti i fattori interni alle singole pagine che possono essere ottimizzati.</p>
-            <ul>
-                <li><strong>Link Building:</strong> Acquisizione di link da siti esterni autorevoli (backlink) che puntano al proprio sito.</li>
-                <li><strong>Segnali Sociali:</strong> Sebbene non siano un fattore di ranking diretto, la condivisione sui social aumenta la visibilità.</li>
-                <li><strong>Brand Mentions:</strong> Citazioni del brand online che contribuiscono alla percezione di autorità.</li>
-            </ul>
-            <br>
+            <div class="mt-4">
+                <h3>2. SEO On-Page (Contenuti e Keyword)</h3>
+                <p>Si riferisce a tutti i fattori interni alle singole pagine che possono essere ottimizzati.</p>
+                <ul>
+                    <li><strong>Link Building:</strong> Acquisizione di link da siti esterni autorevoli (backlink) che puntano al proprio sito.</li>
+                    <li><strong>Segnali Sociali:</strong> Sebbene non siano un fattore di ranking directo, la condivisione sui social aumenta la visibilità.</li>
+                    <li><strong>Brand Mentions:</strong> Citazioni del brand online che contribuiscono alla percezione di autorità.</li>
+                </ul>
+            </div>
 
-            <h2>Tabella Comparativa degli Interventi</h2>
-            <table class="tabella">
-                <!-- FIX W3C: aggiunto <caption> alle tabelle che ne erano prive -->
-                <caption>Tabella comparativa degli interventi SEO per tipologia di approccio</caption>
-                <thead>
-                    <tr>
-                        <!-- FIX W3C: aggiunto scope="col" su tutti i <th> -->
-                        <th scope="col">Tipologia SEO</th>
-                        <th scope="col">Obiettivo Principale</th>
-                        <th scope="col">Esempio di Attività</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Tecnica</td>
-                        <td>Facilitare l'indicizzazione</td>
-                        <td>Ottimizzazione file robots.txt e Sitemap XML</td>
-                    </tr>
-                    <tr>
-                        <td>On-Page</td>
-                        <td>Pertinenza del contenuto</td>
-                        <td>Inserimento parole chiave correlate nel testo</td>
-                    </tr>
-                    <tr>
-                        <td>Off-Page</td>
-                        <td>Aumentare l'autorità</td>
-                        <td>Guest posting su blog di settore autorevoli</td>
-                    </tr>
-                </tbody>
-            </table>
-            <br>
+            <div class="mt-5">
+                <h2>Tabella Comparativa degli Interventi</h2>
+                <table class="tabella">
+                    <caption>Tabella comparativa degli interventi SEO per tipologia di approccio</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Tipologia SEO</th>
+                            <th scope="col">Obiettivo Principale</th>
+                            <th scope="col">Esempio di Attività</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Tecnica</td>
+                            <td>Facilitare l'indicizzazione</td>
+                            <td>Ottimizzazione file robots.txt e Sitemap XML</td>
+                        </tr>
+                        <tr>
+                            <td>On-Page</td>
+                            <td>Pertinenza del contenuto</td>
+                            <td>Inserimento parole chiave correlate nel testo</td>
+                        </tr>
+                        <tr>
+                            <td>Off-Page</td>
+                            <td>Aumentare l'autorità</td>
+                            <td>Guest posting su blog di settore autorevoli</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-            <h4>L'Importanza dell'Esperienza Utente (UX)</h4>
-            <p>Negli ultimi anni, Google ha dato sempre più peso ai cosiddetti Core Web Vitals, parametri che misurano
-                la qualità dell'esperienza d'uso di una pagina web: stabilità visiva, interattività e tempo di
-                caricamento del contenuto principale. Un sito SEO-friendly è, prima di tutto, un sito User-friendly.</p>
-            <br>
+            <div class="mt-4">
+                <h2>L'Importanza dell'Esperienza Utente (UX)</h2>
+                <p>Negli ultimi anni, Google ha dato sempre più peso ai cosiddetti Core Web Vitals, parametri che misurano
+                    la qualità dell'esperienza d'uso di una pagina web: stabilità visiva, interattività e tempo di
+                    caricamento del contenuto principale. Un sito SEO-friendly è, prima di tutto, un sito User-friendly.</p>
+            </div>
 
-            <h4>Evoluzione e Trend Futuri</h4>
-            <p>Con l'avvento dell'intelligenza artificiale generativa e di sistemi come SGE (Search Generative
-                Experience), la SEO si sta spostando verso l'ottimizzazione per l'intento di ricerca complesso e
-                la fornitura di risposte dirette. L'autorità dell'autore (E-E-A-T) diventa un requisito fondamentale
-                per posizionarsi in settori critici come la salute o la finanza.</p>
+            <div class="mt-4 class=mb-4">
+                <h2>Evoluzione e Trend Futuri</h2>
+                <p>Con l'avvento dell'intelligenza artificiale generativa e di sistemi come SGE (Search Generative
+                    Experience), la SEO si sta spostando verso l'ottimizzazione per l'intento di ricerca complesso e
+                    la fornitura di risposte dirette. L'autorità dell'autore (E-E-A-T) diventa un requisito fondamentale
+                    per posizionarsi in settori critici come la salute o la finanza.</p>
+            </div>
         </div>
     `
 };
@@ -104,21 +106,21 @@ const InfoView = {
 const Info2View = {
     template: `
         <div>
-            <h2>Approfondimento Avanzato: Meccanismi di Scansione, Semantica e Search Intent</h2>
-            <h4>Per comprendere appieno il funzionamento della SEO moderna a livello accademico e professionale,
+            <h1>Approfondimento Avanzato: Meccanismi di Scansione, Semantica e Search Intent</h1>
+            <p class="lead"><strong>Per comprendere appieno il funzionamento della SEO moderna a livello accademico e professionale,
                 è necessario analizzare come i motori di ricerca gestiscono le proprie risorse computazionali
-                e come interpretano il linguaggio umano al di là delle semplici parole chiave.</h4>
+                e come interpretano il linguaggio umano al di là delle semplici parole chiave.</strong></p>
             <hr>
 
-            <article>
-                <h3>1. Il Crawl Budget (Budget di Scansione)</h3>
+            <article class="mt-4">
+                <h2>1. Il Crawl Budget (Budget di Scansione)</h2>
                 <p>I motori di ricerca non hanno risorse infinite. Per questo motivo, Google assegna a ogni sito web
                     un <strong>Crawl Budget</strong>: il numero limitato di pagine che il crawler (Googlebot) decide
                     di scansionare in un determinato arco di tempo.</p>
                 <p>Se un sito spreca questo budget, le pagine nuove o aggiornate potrebbero non essere indicizzate
                     per settimane. I fattori principali che determinano il budget sono l'autorità del sito e la
                     velocità di risposta del server.</p>
-                <h6>Sprechi comuni di Crawl Budget:</h6>
+                <h3>Sprechi comuni di Crawl Budget:</h3>
                 <ul>
                     <li><strong>Contenuti duplicati:</strong> URL diversi che mostrano la stessa pagina.</li>
                     <li><strong>Pagine di errore:</strong> Link interni interrotti che restituiscono un codice HTTP 404.</li>
@@ -126,8 +128,8 @@ const Info2View = {
                 </ul>
             </article>
 
-            <article>
-                <h3>2. Struttura dei Dati e Web Semantico (Schema.org)</h3>
+            <article class="mt-4">
+                <h2>2. Struttura dei Dati e Web Semantico (Schema.org)</h2>
                 <p>I motori di ricerca sono eccellenti nel leggere il testo, ma faticano a capirne il contesto.
                     I <strong>Dati Strutturati</strong> sono frammenti di codice (solitamente in formato
                     <code>JSON-LD</code>) inseriti nell'HTML per spiegare esplicitamente al motore di ricerca
@@ -136,8 +138,8 @@ const Info2View = {
                     (risultati arricchiti con stelle, prezzi o date), aumentando il CTR (Click-Through Rate).</p>
             </article>
 
-            <article>
-                <h3>3. L'Evoluzione Semantica: Da "Strings" a "Things"</h3>
+            <article class="mt-4">
+                <h2>3. L'Evoluzione Semantica: Da "Strings" a "Things"</h2>
                 <p>Nel passato, la SEO si basava sulla <em>keyword density</em>. Oggi Google utilizza algoritmi
                     avanzati di NLP (Natural Language Processing) come BERT e MUM. L'approccio attuale si riassume
                     nel motto: <em>"Search graphs, not strings"</em>.</p>
@@ -149,8 +151,8 @@ const Info2View = {
                 </ul>
             </article>
 
-            <article>
-                <h3>4. La Decostruzione del Search Intent (Intento di Ricerca)</h3>
+            <article class="mt-4">
+                <h2>4. La Decostruzione del Search Intent (Intento di Ricerca)</h2>
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped">
                         <caption>Categorie di intento di ricerca, obiettivo dell'utente e tipo di pagina ideale</caption>
@@ -187,8 +189,8 @@ const Info2View = {
                 </div>
             </article>
 
-            <article>
-                <h3>5. SEO Internazionale e Gestione della Geolocalizzazione</h3>
+            <article class="mt-4 mb-5">
+                <h2>5. SEO Internazionale e Gestione della Geolocalizzazione</h2>
                 <p>Quando un progetto web si espande su più mercati o lingue, entrano in gioco direttive tecniche
                     specifiche per evitare che i motori di ricerca scambino le traduzioni per contenuti duplicati.</p>
                 <ul>
@@ -260,7 +262,7 @@ const ModificaView = {
     },
 
     template: `
-        <div>
+        <div class="mb-5">
             <h1>Modifica dati utenti</h1>
             <p class="mb-4">Qui puoi aggiungere, modificare ed eliminare utenti direttamente dal componente Vue.</p>
 
@@ -298,6 +300,7 @@ const ModificaView = {
 
             <div class="table-responsive">
                 <table class="user-table table table-striped table-bordered">
+                    <caption class="sr-only">Tabella contenente la lista degli utenti registrati nel sistema e le azioni di modifica o rimozione</caption>
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">Username</th>
@@ -312,8 +315,12 @@ const ModificaView = {
                             <td>{{ user.password }}</td>
                             <td>{{ user.cellulare }}</td>
                             <td>
-                                <button class="btn-edit" @click="editUser(index)">Modifica</button>
-                                <button class="btn-delete" @click="deleteUser(index)">Elimina</button>
+                                <button class="btn-edit" 
+                                        @click="editUser(index)" 
+                                        :aria-label="'Modifica credenziali utente ' + user.username">Modifica</button>
+                                <button class="btn-delete" 
+                                        @click="deleteUser(index)" 
+                                        :aria-label="'Elimina definitivamente utente ' + user.username">Elimina</button>
                             </td>
                         </tr>
                     </tbody>
@@ -368,7 +375,7 @@ const JsonView = {
     },
 
     template: `
-        <div>
+        <div class="mb-5">
             <h1>Database .json</h1>
             <p class="mb-4">La vista legge i dati da <strong>dati.json</strong> e li mostra sia in tabella sia in formato JSON.</p>
 
@@ -383,50 +390,53 @@ const JsonView = {
                 >
             </div>
 
-            <div v-if="loading" class="alert alert-info">Caricamento dati in corso...</div>
-            <div v-else-if="error" class="alert alert-danger">{{ error }}</div>
+            <div aria-live="polite">
+                <div v-if="loading" class="alert alert-info">Caricamento dati in corso...</div>
+                <div v-else-if="error" class="alert alert-danger">{{ error }}</div>
 
-            <template v-else>
-                <div class="alert alert-success">
-                    Record caricati: <strong>{{ playersCount }}</strong>
-                </div>
+                <template v-else>
+                    <div class="alert alert-success">
+                        Record caricati: <strong>{{ playersCount }}</strong>
+                    </div>
 
-                <div v-if="!filteredPlayers.length" class="alert alert-warning">
-                    Nessun record trovato per il cognome inserito.
-                </div>
+                    <div v-if="!filteredPlayers.length" class="alert alert-warning">
+                        Nessun record trovato per il cognome inserito.
+                    </div>
 
-                <div v-if="filteredPlayers.length" class="table-responsive mb-4">
-                    <table class="table table-bordered table-striped">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Nome</th>
-                                <th scope="col">Cognome</th>
-                                <th scope="col">Numero</th>
-                                <th scope="col">Ruolo</th>
-                                <th scope="col">Squadra</th>
-                                <th scope="col">Sesso</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="player in filteredPlayers" :key="player.id">
-                                <td>{{ player.id }}</td>
-                                <td>{{ player.nome }}</td>
-                                <td>{{ player.cognome }}</td>
-                                <td>{{ player.numero }}</td>
-                                <td>{{ player.ruolo }}</td>
-                                <td>{{ player.squadra_attuale }}</td>
-                                <td>{{ player.sesso }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                    <div v-if="filteredPlayers.length" class="table-responsive mb-4">
+                        <table class="table table-bordered table-striped">
+                            <caption class="sr-only">Tabella dei giocatori di pallavolo filtrabile per cognome</caption>
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Cognome</th>
+                                    <th scope="col">Numero</th>
+                                    <th scope="col">Ruolo</th>
+                                    <th scope="col">Squadra</th>
+                                    <th scope="col">Sesso</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="player in filteredPlayers" :key="player.id">
+                                    <td>{{ player.id }}</td>
+                                    <td>{{ player.nome }}</td>
+                                    <td>{{ player.cognome }}</td>
+                                    <td>{{ player.numero }}</td>
+                                    <td>{{ player.ruolo }}</td>
+                                    <td>{{ player.squadra_attuale }}</td>
+                                    <td>{{ player.sesso }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                <details>
-                    <summary class="mb-2">Mostra JSON completo</summary>
-                    <pre class="p-3 bg-light border rounded" style="white-space: pre-wrap;">{{ jsonPreview }}</pre>
-                </details>
-            </template>
+                    <details>
+                        <summary class="mb-2">Mostra JSON completo</summary>
+                        <pre class="p-3 bg-light border rounded" style="white-space: pre-wrap;">{{ jsonPreview }}</pre>
+                    </details>
+                </template>
+            </div>
         </div>
     `
 }
