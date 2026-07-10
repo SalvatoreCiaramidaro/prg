@@ -1,4 +1,4 @@
-/* CSS Custom Properties per tema chiaro/scuro */
+/* Variabili CSS globali: definiscono colori e parametri base del tema chiaro. */
 :root {
     --bg-primary: #ffffff;
     --bg-secondary: #f8f9fa;
@@ -17,7 +17,7 @@
     --div-bg: #ffffff;
 }
 
-/* Dark Mode */
+/* Override delle variabili quando il tema scuro è attivo. */
 html[data-theme="dark"] {
     --bg-primary: #1a1a1a;
     --bg-secondary: #2d2d2d;
@@ -36,20 +36,20 @@ html[data-theme="dark"] {
     --div-bg: #2d2d2d;
 }
 
-/* Colore del testo personalizzato nel main */
+/* Testo introduttivo della home: leggermente più morbido rispetto al titolo. */
 .ciao {
     color: var(--text-secondary);
     font-size: 1.1rem;
 }
 
-/* Evidenzia il tasto attivo nella navbar */
+/* Evidenzia la voce di navigazione attiva. */
 .nav-item.active .nav-link {
     color: #fff !important;
     font-weight: bold;
     border-bottom: 2px solid #007bff;
 }
 
-/* Stile per i titoli delle sezioni */
+/* Titoli principali: tutti ereditano il colore del testo principale. */
 h1, h2, h3, h4, h5, h6 {
     color: var(--text-primary);
 }
@@ -66,7 +66,7 @@ h2 {
     zoom: 50%;
 }
 
-/* 1. Forza l'altezza massima su tutti i livelli gerarchici */
+/* Layout generale: pagina alta come la finestra e con sfondo coerente al tema. */
 html, body {
     height: 100%;
     margin: 0;
@@ -76,20 +76,20 @@ html, body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* 2. Il contenitore di Vue (#app) deve diventare il "motore" del layout */
+/* Il container Vue gestisce la struttura verticale dell'intera pagina. */
 #app {
     display: flex;
     flex-direction: column;
     min-height: 100vh; /* 100% dell'altezza della finestra del browser */
 }
 
-/* 3. Il main deve "mangiare" tutto lo spazio bianco disponibile */
+/* Il contenuto centrale si espande per spingere il footer verso il fondo. */
 main {
     flex: 1 0 auto; /* Spinge il footer in fondo espandendosi */
     margin-bottom: 70px; 
 }
 
-/* 4. Il footer rimane alla base */
+/* Footer fisso in basso, sempre visibile durante la navigazione. */
 footer {
     position: fixed;
     left: 0;
@@ -211,7 +211,7 @@ footer {
     border-bottom: none;
 }
 
-/* Dark mode toggle bottone */
+/* Pulsante per alternare tema chiaro e scuro. */
 .btn-theme-toggle {
     background-color: transparent;
     border: 2px solid var(--navbar-text);
@@ -235,7 +235,7 @@ footer {
     outline-offset: 2px;
 }
 
-/* Focus visibile per accessibilità tastiera */
+/* Evidenziazione visibile per chi naviga con tastiera. */
 button:focus-visible,
 input:focus-visible,
 a:focus-visible {
@@ -243,7 +243,7 @@ a:focus-visible {
     outline-offset: 2px;
 }
 
-/* Stile per input form */
+/* Campi di input uniformi rispetto al tema scelto. */
 .form-control {
     background-color: var(--input-bg);
     color: var(--text-primary);
@@ -257,7 +257,7 @@ a:focus-visible {
     box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
 }
 
-/* Navbar a tema */
+/* Navbar adattata alle variabili del tema. */
 .navbar {
     background-color: var(--navbar-bg) !important;
 }
@@ -267,7 +267,7 @@ a:focus-visible {
     color: var(--navbar-text) !important;
 }
 
-/* Stile input-group a tema */
+/* Componenti input-group coerenti con il tema. */
 .input-group .form-control {
     background-color: var(--input-bg);
     color: var(--text-primary);
@@ -293,7 +293,7 @@ a:focus-visible {
     color: white;
 }
 
-/* Card a tema */
+/* Card usate nella vista di modifica utenti. */
 .card {
     background-color: var(--bg-secondary);
     color: var(--text-primary);
@@ -304,7 +304,7 @@ a:focus-visible {
     color: var(--text-primary);
 }
 
-/* Testo delle tabelle in dark mode */
+/* Tabelle leggibili anche in modalità scura. */
 .table {
     color: var(--text-primary);
     background-color: var(--bg-primary);
@@ -329,9 +329,9 @@ a:focus-visible {
     background-color: var(--table-row-alt);
 }
 
-/* ===== PANNELLO ACCESSIBILITÀ ===== */
+/* Sezione dedicata al pannello di accessibilità. */
 
-/* Pulsante di accesso al pannello accessibilità (in basso a destra) */
+/* Pulsante flottante per aprire il pannello accessibilità. */
 .accessibility-btn {
     position: fixed;
     bottom: 70px;
@@ -363,7 +363,7 @@ a:focus-visible {
     outline-offset: 2px;
 }
 
-/* Banner/Panel di accessibilità */
+/* Pannello laterale con tutte le opzioni di accessibilità. */
 .accessibility-panel {
     position: fixed;
     bottom: 70px;
@@ -395,7 +395,7 @@ a:focus-visible {
     padding-bottom: 10px;
 }
 
-/* Opzione di accessibilità (checkbox/toggle) */
+/* Ogni opzione del pannello è una riga interattiva con checkbox. */
 .accessibility-option {
     display: flex;
     align-items: center;
@@ -425,7 +425,7 @@ a:focus-visible {
     flex: 1;
 }
 
-/* Controlli per font size */
+/* Controlli per aumentare o ridurre la dimensione del testo. */
 .font-size-control {
     display: flex;
     align-items: center;
@@ -462,7 +462,7 @@ a:focus-visible {
     text-align: center;
 }
 
-/* Pulsante chiudi panel */
+/* Bottone per chiudere rapidamente il pannello. */
 .accessibility-panel-close {
     position: absolute;
     top: 10px;
@@ -479,7 +479,7 @@ a:focus-visible {
     opacity: 0.7;
 }
 
-/* High Contrast Mode */
+/* Modalità ad alto contrasto: cambia le variabili per migliorare la leggibilità. */
 html.high-contrast {
     --bg-primary: #000000;
     --bg-secondary: #1a1a1a;
@@ -503,7 +503,7 @@ html.high-contrast textarea {
     border: 2px solid #ffff00;
 }
 
-/* Reduced Motion */
+/* Riduzione animazioni e transizioni per chi è sensibile al movimento. */
 html.reduced-motion,
 html.reduced-motion * {
     animation-duration: 0.01ms !important;
@@ -511,7 +511,7 @@ html.reduced-motion * {
     transition-duration: 0.01ms !important;
 }
 
-/* Font Size Increase */
+/* Classi per aumentare globalmente la dimensione del font. */
 html.font-size-large {
     font-size: 18px;
 }
@@ -524,7 +524,7 @@ html.font-size-huge {
     font-size: 22px;
 }
 
-/* Dyslexia-friendly Font */
+/* Font più leggibile per la modalità dislessia-friendly. */
 @import url('https://fonts.googleapis.com/css2?family=OpenDyslexic&display=swap');
 
 html.dyslexia-font,

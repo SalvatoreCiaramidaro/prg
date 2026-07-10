@@ -1,8 +1,10 @@
 // app.js
+// Questo file definisce l'applicazione Vue: viste, router e funzioni di accessibilità.
 const { createApp } = Vue;
 const { createRouter, createWebHashHistory } = VueRouter;
 
 
+// Vista iniziale con contenuti introduttivi sul progetto.
 const HomeView = {
     template: `
         <div class="mb-5">
@@ -14,6 +16,7 @@ const HomeView = {
 };
 
 
+// Vista teorica sulla SEO con sezioni di contenuto, elenco e tabella comparativa.
 const InfoView = {
     template: `
         <div>
@@ -103,6 +106,7 @@ const InfoView = {
 
 
 // ----- APPROFONDIMENTO SEO AVANZATO (pagina 2) -----
+// Seconda vista di approfondimento: crawl budget, dati strutturati e search intent.
 const Info2View = {
     template: `
         <div>
@@ -204,6 +208,7 @@ const Info2View = {
     `
 };
 
+// Vista per gestire una lista utenti locale: aggiunta, modifica ed eliminazione.
 const ModificaView = {
     data() {
         return {
@@ -217,10 +222,12 @@ const ModificaView = {
         }
     },
     methods: {
+        // Riporta il form allo stato iniziale e annulla l'eventuale modifica in corso.
         resetForm() {
             this.newUser = { username: '', password: '', cellulare: '' };
             this.editIndex = null;
         },
+        // Salva un nuovo utente oppure aggiorna quello selezionato.
         saveUser() {
             const username = this.newUser.username.trim();
             const password = this.newUser.password.trim();
@@ -241,10 +248,12 @@ const ModificaView = {
 
             this.resetForm();
         },
+        // Carica i dati dell'utente scelto nel form per poterli modificare.
         editUser(index) {
             this.newUser = { ...this.userList[index] };
             this.editIndex = index;
         },
+        // Elimina un utente dopo conferma dell'operazione.
         deleteUser(index) {
             const user = this.userList[index];
             const confirmed = confirm(`Vuoi eliminare l'utente ${user.username}?`);
@@ -330,6 +339,121 @@ const ModificaView = {
     `
 };
 
+// Template root dell'app Vue, con header, footer, router-view e pannello di accessibilità.
+const AppShellTemplate = `
+    <div>
+        <a href="#main-content" class="sr-only sr-only-focusable">Salta al contenuto principale</a>
+
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Menu principale">
+                <router-link to="/" class="navbar-brand" aria-label="Vai alla Home">Progetto</router-link>
+
+                <button class="navbar-toggler"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#navbarNav"
+                        aria-controls="navbarNav"
+                        aria-expanded="false"
+                        aria-label="Apri o chiudi il menu di navigazione">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item" :class="{ active: $route.path === '/info' }">
+                            <router-link class="nav-link" to="/info">Approfondimento-1</router-link>
+                        </li>
+                        <li class="nav-item" :class="{ active: $route.path === '/info2' }">
+                            <router-link class="nav-link" to="/info2">Approfondimento-2</router-link>
+                        </li>
+                        <li class="nav-item" :class="{ active: $route.path === '/modifica' }">
+                            <router-link class="nav-link" to="/modifica">Modifica dati</router-link>
+                        </li>
+                        <li class="nav-item" :class="{ active: $route.path === '/json' }">
+                            <router-link class="nav-link" to="/json">Database .json</router-link>
+                        </li>
+                    </ul>
+                </div>
+
+                <button class="btn-theme-toggle"
+                        @click="toggleDarkMode"
+                        :aria-label="isDarkMode ? 'Passa a modalità chiara' : 'Passa a modalità scura'">
+                    <span aria-hidden="true">{{ isDarkMode ? '☀️' : '🌙' }}</span>
+                </button>
+            </nav>
+        </header>
+
+        <main id="main-content" class="container mt-5">
+            <router-view></router-view>
+        </main>
+
+        <footer class="bg-dark text-white text-center py-3 mt-5">
+            <div class="container">
+                <p class="mb-0">© 2026 Progetto di Alberto Poggiaspalla e Salvatore Ciaramidaro</p>
+            </div>
+        </footer>
+
+        <button class="accessibility-btn"
+                @click="showAccessibilityPanel = !showAccessibilityPanel"
+                :aria-expanded="showAccessibilityPanel.toString()"
+                aria-controls="accessibility-panel"
+                aria-label="Apri pannello accessibilità"
+                title="Accessibilità">
+            <span aria-hidden="true">♿</span>
+        </button>
+
+        <div id="accessibility-panel"
+             class="accessibility-panel"
+             :class="{ hidden: !showAccessibilityPanel }"
+             :aria-hidden="(!showAccessibilityPanel).toString()"
+             role="region"
+             aria-label="Opzioni di accessibilità">
+
+            <button class="accessibility-panel-close"
+                    @click="showAccessibilityPanel = false"
+                    aria-label="Chiudi pannello accessibilità">
+                <span aria-hidden="true">✕</span>
+            </button>
+
+            <h2>⚙️ Accessibilità</h2>
+
+            <div class="font-size-control">
+                <span id="font-label">Dimensione testo:</span>
+                <button @click="decreaseFontSize"
+                        :disabled="fontSizeLevel <= 0"
+                        aria-label="Diminuisci dimensione del testo">-</button>
+                <span class="font-size-value" aria-live="polite" aria-atomic="true" aria-labelledby="font-label">
+                    {{ fontSizeLevel === 0 ? '100%' : (100 + fontSizeLevel * 15) + '%' }}
+                </span>
+                <button @click="increaseFontSize"
+                        :disabled="fontSizeLevel >= 3"
+                        aria-label="Aumenta dimensione del testo">+</button>
+            </div>
+
+            <div class="accessibility-option">
+                <input type="checkbox" id="high-contrast" :checked="highContrast" @change="toggleHighContrast">
+                <label for="high-contrast">🎨 Alto Contrasto</label>
+            </div>
+
+            <div class="accessibility-option">
+                <input type="checkbox" id="reduced-motion" :checked="reducedMotion" @change="toggleReducedMotion">
+                <label for="reduced-motion">⚡ Riduci Animazioni</label>
+            </div>
+
+            <div class="accessibility-option">
+                <input type="checkbox" id="dyslexia-font" :checked="dyslexiaFont" @change="toggleDyslexiaFont">
+                <label for="dyslexia-font">📖 Font Dislessia-friendly</label>
+            </div>
+
+            <div class="accessibility-option">
+                <input type="checkbox" id="underline-links" :checked="underlineLinks" @change="toggleUnderlineLinks">
+                <label for="underline-links">🔗 Sottolinea Link</label>
+            </div>
+        </div>
+    </div>
+`;
+
+// Vista che carica un file JSON esterno, lo filtra per cognome e mostra i risultati.
 const JsonView = {
     data() {
         return {
@@ -340,12 +464,15 @@ const JsonView = {
         }
     },
     computed: {
+        // Conta quanti record risultano dopo il filtro.
         playersCount() {
             return this.filteredPlayers.length;
         },
+        // Converte i dati filtrati in una stringa JSON leggibile.
         jsonPreview() {
             return JSON.stringify(this.filteredPlayers, null, 2);
         },
+        // Filtra i giocatori in base al cognome digitato dall'utente.
         filteredPlayers() {
             const query = this.searchCognome.trim().toLowerCase();
 
@@ -358,6 +485,7 @@ const JsonView = {
             );
         }
     },
+    // Quando la vista viene caricata, legge i dati dal file dati.json.
     async mounted() {
         try {
             const response = await fetch('dati.json');
@@ -441,6 +569,7 @@ const JsonView = {
     `
 }
 
+// Configurazione del router: ogni path associa una vista diversa.
 const router = createRouter({
     history: createWebHashHistory(),
     routes: [
@@ -452,7 +581,9 @@ const router = createRouter({
     ]
 });
 
+// Istanza principale dell'app: contiene stato globale e comandi per l'accessibilità.
 const app = createApp({
+    template: AppShellTemplate,
     data() {
         return {
             isDarkMode: localStorage.getItem('theme') === 'dark',
@@ -465,6 +596,7 @@ const app = createApp({
         }
     },
     methods: {
+        // Attiva o disattiva il tema scuro e lo salva nel localStorage.
         toggleDarkMode() {
             this.isDarkMode = !this.isDarkMode;
             if (this.isDarkMode) {
@@ -475,37 +607,42 @@ const app = createApp({
                 localStorage.setItem('theme', 'light');
             }
         },
+        // Aumenta la dimensione del testo fino al limite massimo.
         increaseFontSize() {
             if (this.fontSizeLevel < 3) { this.fontSizeLevel++; this.applyFontSize(); }
         },
+        // Riduce la dimensione del testo fino al livello base.
         decreaseFontSize() {
             if (this.fontSizeLevel > 0) { this.fontSizeLevel--; this.applyFontSize(); }
         },
+        // Applica la classe CSS corrispondente al livello scelto e salva la preferenza.
         applyFontSize() {
             const root = document.documentElement;
-            // FIX: logica semplificata - rimuove tutto e aggiunge solo la classe corretta
             root.classList.remove('font-size-large', 'font-size-xlarge', 'font-size-huge');
             if      (this.fontSizeLevel === 1) root.classList.add('font-size-large');
             else if (this.fontSizeLevel === 2) root.classList.add('font-size-xlarge');
             else if (this.fontSizeLevel >= 3)  root.classList.add('font-size-huge');
             localStorage.setItem('fontSizeLevel', this.fontSizeLevel);
         },
+        // Abilita o disabilita l'alto contrasto tramite classe HTML.
         toggleHighContrast() {
             this.highContrast = !this.highContrast;
-            // classList.toggle(class, bool) aggiunge se true, rimuove se false
             document.documentElement.classList.toggle('high-contrast', this.highContrast);
             localStorage.setItem('highContrast', this.highContrast);
         },
+        // Riduce le animazioni per migliorare la leggibilità e il comfort visivo.
         toggleReducedMotion() {
             this.reducedMotion = !this.reducedMotion;
             document.documentElement.classList.toggle('reduced-motion', this.reducedMotion);
             localStorage.setItem('reducedMotion', this.reducedMotion);
         },
+        // Attiva un font più adatto alla dislessia.
         toggleDyslexiaFont() {
             this.dyslexiaFont = !this.dyslexiaFont;
             document.documentElement.classList.toggle('dyslexia-font', this.dyslexiaFont);
             localStorage.setItem('dyslexiaFont', this.dyslexiaFont);
         },
+        // Forza o rimuove la sottolineatura dei link per renderli più riconoscibili.
         toggleUnderlineLinks() {
             this.underlineLinks = !this.underlineLinks;
             const existing = document.getElementById('underline-links-style');
@@ -520,6 +657,7 @@ const app = createApp({
             localStorage.setItem('underlineLinks', this.underlineLinks);
         }
     },
+    // Al caricamento della pagina ripristina tutte le preferenze memorizzate.
     mounted() {
         if (this.isDarkMode) document.documentElement.setAttribute('data-theme', 'dark');
         this.applyFontSize();
