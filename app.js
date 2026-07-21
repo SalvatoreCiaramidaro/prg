@@ -9,7 +9,7 @@ const HomeView = {
     template: `
         <div class="mb-5">
             <h1>Benvenuto!</h1>
-            <p class="ciao">Benvenuto nel progetto per il corso "Fondamenti di sistemi WEB" di Alberto Poggiaspalla e Salvatore Ciaramidaro.</p>
+            <p class="ciao">Benvenuto nel progetto per il corso "Fondamenti di sistemi WEB" di Salvatore Ciaramidaro.</p>
             <img src="sfondoFondWeb.webp" alt="Illustrazione concettuale di una rete di nodi, server e computer interconnessi" class="img-fluid rounded shadow mb-4">
         </div>
     `
@@ -389,7 +389,7 @@ const AppShellTemplate = `
 
         <footer class="bg-dark text-white text-center py-3 mt-5">
             <div class="container">
-                <p class="mb-0">© 2026 Progetto di Alberto Poggiaspalla e Salvatore Ciaramidaro</p>
+                <p class="mb-0">© 2026 Progetto di Salvatore Ciaramidaro</p>
             </div>
         </footer>
 
