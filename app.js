@@ -7,204 +7,196 @@ const { createRouter, createWebHashHistory } = VueRouter;
 // Vista iniziale con contenuti introduttivi sul progetto.
 const HomeView = {
     template: `
-        <div class="mb-5">
-            <h1>Benvenuto!</h1>
-            <p class="ciao">Benvenuto nel progetto per il corso "Fondamenti di sistemi WEB" di Salvatore Ciaramidaro.</p>
-            <img src="sfondoFondWeb.webp" alt="Illustrazione concettuale di una rete di nodi, server e computer interconnessi" class="img-fluid rounded shadow mb-4">
-        </div>
+        <section class="page-shell space-y-6">
+            <div class="hero-panel rounded-3xl p-8 md:p-10 lg:p-12">
+                <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+                    <div class="max-w-2xl">
+                        <p class="kicker mb-3">Corso Fondamenti di sistemi WEB</p>
+                        <h1 class="text-4xl md:text-5xl font-semibold leading-tight">Benvenuto nel progetto di Salvatore Ciaramidaro</h1>
+                        <p class="ciao mt-4 text-lg max-w-xl">Questo sito unisce contenuti teorici, una gestione utenti interattiva e un database JSON, tutto in un layout più moderno e leggibile.</p>
+                        <div class="mt-6 flex flex-wrap gap-3">
+                            <span class="soft-pill rounded-full px-4 py-2 text-sm font-medium">Vue</span>
+                            <span class="soft-pill rounded-full px-4 py-2 text-sm font-medium">Model Context Protocol</span>
+                            <span class="soft-pill rounded-full px-4 py-2 text-sm font-medium">Accessibilità</span>
+                        </div>
+                    </div>
+                    <img src="sfondoFondWeb.webp" alt="Illustrazione concettuale di una rete di nodi, server e computer interconnessi" class="w-full max-w-xl rounded-2xl shadow-soft border border-slate-200/70">
+                </div>
+            </div>
+
+            <div class="grid gap-6 md:grid-cols-3">
+                <article class="section-card rounded-2xl p-6">
+                    <h2 class="text-xl font-semibold">Pagine informative</h2>
+                    <p class="mt-2">Esplora gli approfondimenti sul Model Context Protocol con un layout più ordinato e facilmente scansionabile.</p>
+                </article>
+                <article class="section-card rounded-2xl p-6">
+                    <h2 class="text-xl font-semibold">Gestione utenti</h2>
+                    <p class="mt-2">Aggiungi, modifica o elimina record direttamente nella vista Vue senza perdere il focus.</p>
+                </article>
+                <article class="section-card rounded-2xl p-6">
+                    <h2 class="text-xl font-semibold">Dati JSON</h2>
+                    <p class="mt-2">Consulta i giocatori caricati da un file esterno e filtra i contenuti in tempo reale.</p>
+                </article>
+            </div>
+        </section>
     `
 };
 
 
-// Vista teorica sulla SEO con sezioni di contenuto, elenco e tabella comparativa.
+// Vista teorica sul Model Context Protocol con sezioni di contenuto, elenco e tabella comparativa.
 const InfoView = {
     template: `
-        <div>
-            <h1>Guida Strategica alla Search Engine Optimization (SEO)</h1>
-            <div class="mt-4">
-                <h2>Introduzione alla SEO</h2>
-                <p>La <strong>Search Engine Optimization (SEO)</strong> rappresenta l'insieme delle strategie e delle
-                    pratiche volte ad aumentare la visibilità di un sito web sui motori di ricerca (come Google o Bing)
-                    per i risultati non a pagamento, definiti "organici". L'obiettivo principale è migliorare il
-                    posizionamento delle pagine web per parole chiave rilevanti per il proprio business o contenuto.
-                    Questa guida analizza i pilastri fondamentali per una strategia efficace di ottimizzazione.
-                </p>
+        <section class="page-shell space-y-6">
+            <div class="hero-panel rounded-3xl p-8 md:p-10">
+                <p class="kicker">MCP strategico</p>
+                <h1 class="text-3xl md:text-4xl font-semibold mt-2">Guida Strategica al Model Context Protocol (MCP)</h1>
+                <p class="ciao mt-3 max-w-3xl">Il Model Context Protocol è uno standard che permette ai modelli di intelligenza artificiale di collegarsi a dati, strumenti e servizi esterni in modo ordinato e sicuro.</p>
             </div>
 
-            <div class="mt-4">
-                <h2>I 3 pilastri fondamentali della SEO:</h2>
+            <div class="section-card rounded-2xl p-6 md:p-8 space-y-6">
+                <div>
+                    <h2 class="text-2xl font-semibold">Introduzione al Model Context Protocol</h2>
+                    <p class="mt-2">Il <strong>Model Context Protocol (MCP)</strong> è uno standard aperto pensato per collegare applicazioni AI a risorse esterne come database, file, API e strumenti operativi. L'obiettivo principale è fornire al modello il contesto giusto nel momento giusto, evitando integrazioni rigide e poco riutilizzabili. Questa guida analizza i pilastri fondamentali per capire come MCP organizza la comunicazione tra client, server e strumenti.</p>
+                </div>
 
-                <h3>1. SEO Tecnica (Technical SEO)</h3>
-                <p>La SEO tecnica riguarda l'ottimizzazione dell'infrastruttura del sito affinché i motori di ricerca
-                    possano scansionare (crawl) e indicizzare i contenuti senza ostacoli.</p>
-                <ul>
-                    <li><strong>Tempo di caricamento:</strong> Siti rapidi migliorano l'esperienza utente e sono favoriti dagli algoritmi.</li>
-                    <li><strong>Mobile-friendly:</strong> Con l'aumento dell'uso di dispositivi mobili, è essenziale che il sito sia responsive.</li>
-                    <li><strong>Protocollo HTTPS:</strong> La sicurezza è un fattore di ranking confermato.</li>
-                    <li><strong>Architettura del sito:</strong> Una struttura gerarchica chiara aiuta sia gli utenti che i bot.</li>
-                </ul>
-            </div>
+                <div>
+                    <h2 class="text-2xl font-semibold">I 3 pilastri fondamentali di MCP</h2>
+                    <div class="mt-4 grid gap-4 lg:grid-cols-2">
+                        <article class="rounded-2xl border border-slate-200/70 bg-white/70 p-5">
+                            <h3 class="text-lg font-semibold">1. Host e client MCP</h3>
+                            <p class="mt-2">La parte iniziale di MCP riguarda l'applicazione host e il client che gestisce la connessione. L'host coordina la sessione, mentre il client dialoga con i server MCP per ottenere contesto o invocare strumenti.</p>
+                            <ul class="info-list mt-3">
+                                <li><strong>Sessione controllata:</strong> Il client mantiene una comunicazione coerente con il server durante l'uso.</li>
+                                <li><strong>Contesto esplicito:</strong> Le informazioni condivise vengono richieste e fornite in modo chiaro.</li>
+                                <li><strong>Separazione dei ruoli:</strong> L'applicazione non deve conoscere direttamente ogni dettaglio del servizio esterno.</li>
+                            </ul>
+                        </article>
+                        <article class="rounded-2xl border border-slate-200/70 bg-white/70 p-5">
+                            <h3 class="text-lg font-semibold">2. Server, strumenti e risorse</h3>
+                            <p class="mt-2">I server MCP espongono capacità riutilizzabili come tool, resource e prompt, così il modello può interagire con funzioni esterne in maniera standardizzata.</p>
+                            <ul class="info-list mt-3">
+                                <li><strong>Tool:</strong> Funzioni eseguibili, come cercare dati o lanciare un'azione.</li>
+                                <li><strong>Resource:</strong> Contenuti o dati leggibili dal modello, ad esempio documenti o file.</li>
+                                <li><strong>Prompt:</strong> Istruzioni riutilizzabili che guidano l'uso del contesto.</li>
+                            </ul>
+                        </article>
+                    </div>
+                </div>
 
-            <div class="mt-4">
-                <h3>2. SEO On-Page (Contenuti e Keyword)</h3>
-                <p>Si riferisce a tutti i fattori interni alle singole pagine che possono essere ottimizzati.</p>
-                <ul>
-                    <li><strong>Link Building:</strong> Acquisizione di link da siti esterni autorevoli (backlink) che puntano al proprio sito.</li>
-                    <li><strong>Segnali Sociali:</strong> Sebbene non siano un fattore di ranking directo, la condivisione sui social aumenta la visibilità.</li>
-                    <li><strong>Brand Mentions:</strong> Citazioni del brand online che contribuiscono alla percezione di autorità.</li>
-                </ul>
-            </div>
+                <div>
+                    <h2 class="text-2xl font-semibold">Tabella comparativa degli elementi MCP</h2>
+                    <div class="mt-4 overflow-hidden rounded-2xl border border-slate-200/70">
+                        <table class="tabella">
+                            <caption>Tabella comparativa degli elementi MCP per tipologia di componente</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Tipologia MCP</th>
+                                    <th scope="col">Obiettivo Principale</th>
+                                    <th scope="col">Esempio di Attività</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Host/Client</td>
+                                    <td>Gestire la connessione</td>
+                                    <td>Aprire una sessione e richiedere il contesto al server</td>
+                                </tr>
+                                <tr>
+                                    <td>Tool</td>
+                                    <td>Eseguire azioni utili</td>
+                                    <td>Chiamare una funzione per cercare un record o aggiornare un dato</td>
+                                </tr>
+                                <tr>
+                                    <td>Resource</td>
+                                    <td>Fornire dati al modello</td>
+                                    <td>Leggere un file, una nota o una sorgente informativa</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-            <div class="mt-5">
-                <h2>Tabella Comparativa degli Interventi</h2>
-                <table class="tabella">
-                    <caption>Tabella comparativa degli interventi SEO per tipologia di approccio</caption>
-                    <thead>
-                        <tr>
-                            <th scope="col">Tipologia SEO</th>
-                            <th scope="col">Obiettivo Principale</th>
-                            <th scope="col">Esempio di Attività</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Tecnica</td>
-                            <td>Facilitare l'indicizzazione</td>
-                            <td>Ottimizzazione file robots.txt e Sitemap XML</td>
-                        </tr>
-                        <tr>
-                            <td>On-Page</td>
-                            <td>Pertinenza del contenuto</td>
-                            <td>Inserimento parole chiave correlate nel testo</td>
-                        </tr>
-                        <tr>
-                            <td>Off-Page</td>
-                            <td>Aumentare l'autorità</td>
-                            <td>Guest posting su blog di settore autorevoli</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div>
+                    <h2 class="text-2xl font-semibold">Esperienza d'uso e sviluppi futuri</h2>
+                    <p class="mt-2">Con l'aumento degli assistenti AI, MCP sta diventando importante perché rende più semplice collegare modelli diversi alle stesse fonti di dati e agli stessi strumenti. In futuro questo approccio può favorire integrazioni più modulari, sicure e facili da mantenere.</p>
+                </div>
             </div>
-
-            <div class="mt-4">
-                <h2>L'Importanza dell'Esperienza Utente (UX)</h2>
-                <p>Negli ultimi anni, Google ha dato sempre più peso ai cosiddetti Core Web Vitals, parametri che misurano
-                    la qualità dell'esperienza d'uso di una pagina web: stabilità visiva, interattività e tempo di
-                    caricamento del contenuto principale. Un sito SEO-friendly è, prima di tutto, un sito User-friendly.</p>
-            </div>
-
-            <div class="mt-4 class=mb-4">
-                <h2>Evoluzione e Trend Futuri</h2>
-                <p>Con l'avvento dell'intelligenza artificiale generativa e di sistemi come SGE (Search Generative
-                    Experience), la SEO si sta spostando verso l'ottimizzazione per l'intento di ricerca complesso e
-                    la fornitura di risposte dirette. L'autorità dell'autore (E-E-A-T) diventa un requisito fondamentale
-                    per posizionarsi in settori critici come la salute o la finanza.</p>
-            </div>
-        </div>
+        </section>
     `
 };
 
 
-// ----- APPROFONDIMENTO SEO AVANZATO (pagina 2) -----
-// Seconda vista di approfondimento: crawl budget, dati strutturati e search intent.
+// ----- APPROFONDIMENTO MCP AVANZATO (pagina 2) -----
+// Seconda vista di approfondimento: trasporto, sicurezza e integrazione dei server MCP.
 const Info2View = {
     template: `
-        <div>
-            <h1>Approfondimento Avanzato: Meccanismi di Scansione, Semantica e Search Intent</h1>
-            <p class="lead"><strong>Per comprendere appieno il funzionamento della SEO moderna a livello accademico e professionale,
-                è necessario analizzare come i motori di ricerca gestiscono le proprie risorse computazionali
-                e come interpretano il linguaggio umano al di là delle semplici parole chiave.</strong></p>
-            <hr>
+        <section class="page-shell space-y-6">
+            <div class="hero-panel rounded-3xl p-8 md:p-10">
+                <p class="kicker">Approfondimento avanzato</p>
+                <h1 class="text-3xl md:text-4xl font-semibold mt-2">Trasporto, sicurezza e integrazione dei server MCP</h1>
+                <p class="ciao mt-3 max-w-3xl">Per comprendere appieno il funzionamento di MCP, è utile osservare come passa il contesto tra applicazione, client e server, e come vengono protette le informazioni scambiate.</p>
+            </div>
 
-            <article class="mt-4">
-                <h2>1. Il Crawl Budget (Budget di Scansione)</h2>
-                <p>I motori di ricerca non hanno risorse infinite. Per questo motivo, Google assegna a ogni sito web
-                    un <strong>Crawl Budget</strong>: il numero limitato di pagine che il crawler (Googlebot) decide
-                    di scansionare in un determinato arco di tempo.</p>
-                <p>Se un sito spreca questo budget, le pagine nuove o aggiornate potrebbero non essere indicizzate
-                    per settimane. I fattori principali che determinano il budget sono l'autorità del sito e la
-                    velocità di risposta del server.</p>
-                <h3>Sprechi comuni di Crawl Budget:</h3>
-                <ul>
-                    <li><strong>Contenuti duplicati:</strong> URL diversi che mostrano la stessa pagina.</li>
-                    <li><strong>Pagine di errore:</strong> Link interni interrotti che restituiscono un codice HTTP 404.</li>
-                    <li><strong>Catene di reindirizzamento:</strong> Pagine che rimandano ad altre tramite codici HTTP 301/302 in successione.</li>
-                </ul>
-            </article>
+            <div class="section-card rounded-2xl p-6 md:p-8 space-y-6">
+                <article>
+                    <h2 class="text-2xl font-semibold">1. Trasporto delle richieste</h2>
+                    <p class="mt-2">MCP definisce un modo ordinato per scambiare messaggi tra client e server. Questo aiuta a rendere prevedibile il flusso di richieste, risposte ed errori durante l'uso di strumenti esterni.</p>
+                    <ul class="info-list mt-3">
+                        <li><strong>Messaggi chiari:</strong> Ogni richiesta ha un obiettivo preciso.</li>
+                        <li><strong>Risposte strutturate:</strong> Il server restituisce dati leggibili e coerenti.</li>
+                        <li><strong>Gestione errori:</strong> I problemi vengono comunicati senza interrompere tutto il flusso.</li>
+                    </ul>
+                </article>
 
-            <article class="mt-4">
-                <h2>2. Struttura dei Dati e Web Semantico (Schema.org)</h2>
-                <p>I motori di ricerca sono eccellenti nel leggere il testo, ma faticano a capirne il contesto.
-                    I <strong>Dati Strutturati</strong> sono frammenti di codice (solitamente in formato
-                    <code>JSON-LD</code>) inseriti nell'HTML per spiegare esplicitamente al motore di ricerca
-                    cosa c'è nella pagina. Questo vocabolario fa capo al progetto globale <strong>Schema.org</strong>.</p>
-                <p>L'uso corretto dei dati strutturati permette a Google di mostrare i <strong>Rich Snippets</strong>
-                    (risultati arricchiti con stelle, prezzi o date), aumentando il CTR (Click-Through Rate).</p>
-            </article>
+                <article>
+                    <h2 class="text-2xl font-semibold">2. Sicurezza e controllo del contesto</h2>
+                    <p class="mt-2">Uno dei vantaggi di MCP è che permette di controllare meglio quali informazioni vengono condivise con il modello. In questo modo l'applicazione può limitare il contesto ai dati davvero necessari e ridurre l'esposizione di informazioni sensibili.</p>
+                </article>
 
-            <article class="mt-4">
-                <h2>3. L'Evoluzione Semantica: Da "Strings" a "Things"</h2>
-                <p>Nel passato, la SEO si basava sulla <em>keyword density</em>. Oggi Google utilizza algoritmi
-                    avanzati di NLP (Natural Language Processing) come BERT e MUM. L'approccio attuale si riassume
-                    nel motto: <em>"Search graphs, not strings"</em>.</p>
-                <ul>
-                    <li><strong>Le Entità:</strong> Un oggetto o concetto univoco che Google mappa nel suo
-                        <strong>Knowledge Graph</strong>.</li>
-                    <li><strong>LSI e Co-occorrenza:</strong> L'algoritmo analizza la presenza di parole correlate
-                        che dovrebbero logicamente apparire nel contesto.</li>
-                </ul>
-            </article>
+                <article>
+                    <h2 class="text-2xl font-semibold">3. Confronto tra componenti MCP</h2>
+                    <div class="mt-4 overflow-hidden rounded-2xl border border-slate-200/70">
+                        <table class="table table-bordered table-striped mb-0">
+                            <caption>Elementi MCP, funzione e uso tipico</caption>
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Elemento MCP</th>
+                                    <th scope="col">Funzione</th>
+                                    <th scope="col">Uso tipico</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Client</strong></td>
+                                    <td>Invia richieste e gestisce il dialogo.</td>
+                                    <td>Collegarsi a un server MCP per ottenere strumenti o dati.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Server</strong></td>
+                                    <td>Espone capacità e risorse.</td>
+                                    <td>Pubblicare tool, documenti e prompt per l'applicazione.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Host</strong></td>
+                                    <td>Orchestra l'esperienza complessiva.</td>
+                                    <td>Applicazione principale che controlla il contesto della sessione.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Tool</strong></td>
+                                    <td>Esegue operazioni attive.</td>
+                                    <td>Ricerca, aggiornamento o automazione di un'attività.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
 
-            <article class="mt-4">
-                <h2>4. La Decostruzione del Search Intent (Intento di Ricerca)</h2>
-                <div class="table-responsive">
-                    <table class="table table-bordered table-striped">
-                        <caption>Categorie di intento di ricerca, obiettivo dell'utente e tipo di pagina ideale</caption>
-                        <thead class="thead-dark">
-                            <tr>
-                                <th scope="col">Tipo di Intento</th>
-                                <th scope="col">Obiettivo dell'Utente</th>
-                                <th scope="col">Tipo di Pagina Ideale</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Informazionale</strong></td>
-                                <td>Trovare una risposta a una domanda (es. <em>"come funziona un cookie"</em>)</td>
-                                <td>Articolo di blog, guida dettagliata, FAQ.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Navigazionale</strong></td>
-                                <td>Raggiungere un sito specifico (es. <em>"Facebook login"</em>)</td>
-                                <td>Homepage, landing page ufficiale del brand.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Commerciale</strong></td>
-                                <td>Investigare prima dell'acquisto (es. <em>"miglior smartphone"</em>)</td>
-                                <td>Guide comparative, recensioni, liste "top 10".</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Transazionale</strong></td>
-                                <td>Compiere un'azione economica (es. <em>"compra biglietti concerto"</em>)</td>
-                                <td>Pagina prodotto e-commerce, form di prenotazione.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </article>
-
-            <article class="mt-4 mb-5">
-                <h2>5. SEO Internazionale e Gestione della Geolocalizzazione</h2>
-                <p>Quando un progetto web si espande su più mercati o lingue, entrano in gioco direttive tecniche
-                    specifiche per evitare che i motori di ricerca scambino le traduzioni per contenuti duplicati.</p>
-                <ul>
-                    <li><strong>Attributo <code>rel="alternate" hreflang="..."</code>:</strong> Indica a Google
-                        a quale lingua e area geografica è destinato ogni URL.</li>
-                    <li><strong>Geolocalizzazione dell'infrastruttura:</strong> La scelta tra domini nazionali
-                        (ccTLD come <code>.it</code>), sottodomini o sottocartelle influisce sull'autorità del dominio.</li>
-                </ul>
-            </article>
-        </div>
+                <article>
+                    <h2 class="text-2xl font-semibold">4. Integrazione nei progetti moderni</h2>
+                    <p class="mt-2">MCP si inserisce bene nei progetti moderni perché separa il modello dal dettaglio dell'integrazione. Così lo stesso assistente può cambiare dati o strumenti senza riscrivere ogni volta la logica di collegamento.</p>
+                </article>
+            </div>
+        </section>
     `
 };
 
@@ -212,22 +204,19 @@ const Info2View = {
 const ModificaView = {
     data() {
         return {
-            userList : [ 
-               { username: 'admin',     password: '123', cellulare: '3334455666' },
+            userList: [
+                { username: 'admin', password: '123', cellulare: '3334455666' },
                 { username: 'alberto_p', password: 'web', cellulare: '3409988777' }
             ],
-            newUser: { username: '', password: '', cellulare: ''},
+            newUser: { username: '', password: '', cellulare: '' },
             editIndex: null
-            
         }
     },
     methods: {
-        // Riporta il form allo stato iniziale e annulla l'eventuale modifica in corso.
         resetForm() {
             this.newUser = { username: '', password: '', cellulare: '' };
             this.editIndex = null;
         },
-        // Salva un nuovo utente oppure aggiorna quello selezionato.
         saveUser() {
             const username = this.newUser.username.trim();
             const password = this.newUser.password.trim();
@@ -248,12 +237,10 @@ const ModificaView = {
 
             this.resetForm();
         },
-        // Carica i dati dell'utente scelto nel form per poterli modificare.
         editUser(index) {
             this.newUser = { ...this.userList[index] };
             this.editIndex = index;
         },
-        // Elimina un utente dopo conferma dell'operazione.
         deleteUser(index) {
             const user = this.userList[index];
             const confirmed = confirm(`Vuoi eliminare l'utente ${user.username}?`);
@@ -271,108 +258,85 @@ const ModificaView = {
     },
 
     template: `
-        <div class="mb-5">
-            <h1>Modifica dati utenti</h1>
-            <p class="mb-4">Qui puoi aggiungere, modificare ed eliminare utenti direttamente dal componente Vue.</p>
+        <section class="page-shell space-y-6">
+            <div class="hero-panel rounded-3xl p-8 md:p-10">
+                <p class="kicker">Gestione utenti</p>
+                <h1 class="text-3xl md:text-4xl font-semibold mt-2">Modifica dati utenti</h1>
+                <p class="ciao mt-3 max-w-2xl">Qui puoi aggiungere, modificare ed eliminare utenti direttamente dal componente Vue in modo rapido e leggibile.</p>
+            </div>
 
-            <div class="card mb-4 shadow-sm">
-                <div class="card-body">
-                    <h2 class="h4 mb-3">{{ editIndex === null ? 'Aggiungi nuovo utente' : 'Modifica utente' }}</h2>
+            <div class="section-card rounded-2xl p-6 md:p-8">
+                <h2 class="text-2xl font-semibold mb-4">{{ editIndex === null ? 'Aggiungi nuovo utente' : 'Modifica utente' }}</h2>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label for="username">Username</label>
-                            <input id="username" v-model="newUser.username" type="text" class="form-control" placeholder="Inserisci username">
-                        </div>
-
-                        <div class="form-group col-md-4">
-                            <label for="password">Password</label>
-                            <input id="password" v-model="newUser.password" type="text" class="form-control" placeholder="Inserisci password">
-                        </div>
-
-                        <div class="form-group col-md-4">
-                            <label for="cellulare">Cellulare</label>
-                            <input id="cellulare" v-model="newUser.cellulare" type="text" class="form-control" placeholder="Inserisci numero di cellulare">
-                        </div>
+                <div class="grid gap-4 md:grid-cols-3">
+                    <div>
+                        <label for="username" class="block mb-2 font-medium">Username</label>
+                        <input id="username" v-model="newUser.username" type="text" class="form-control" placeholder="Inserisci username">
                     </div>
-
-                    <div class="d-flex flex-wrap align-items-center">
-                        <button class="btn btn-primary mr-2 mb-2" @click="saveUser">
-                            {{ editIndex === null ? 'Aggiungi utente' : 'Salva modifiche' }}
-                        </button>
-                        <button v-if="editIndex !== null" class="btn btn-secondary mb-2" @click="resetForm">
-                            Annulla modifica
-                        </button>
+                    <div>
+                        <label for="password" class="block mb-2 font-medium">Password</label>
+                        <input id="password" v-model="newUser.password" type="text" class="form-control" placeholder="Inserisci password">
                     </div>
+                    <div>
+                        <label for="cellulare" class="block mb-2 font-medium">Cellulare</label>
+                        <input id="cellulare" v-model="newUser.cellulare" type="text" class="form-control" placeholder="Inserisci numero di cellulare">
+                    </div>
+                </div>
+
+                <div class="mt-5 flex flex-wrap gap-3">
+                    <button class="btn btn-primary" @click="saveUser">
+                        {{ editIndex === null ? 'Aggiungi utente' : 'Salva modifiche' }}
+                    </button>
+                    <button v-if="editIndex !== null" class="btn btn-secondary" @click="resetForm">
+                        Annulla modifica
+                    </button>
                 </div>
             </div>
 
-            <div class="table-responsive">
-                <table class="user-table table table-striped table-bordered">
-                    <caption class="sr-only">Tabella contenente la lista degli utenti registrati nel sistema e le azioni di modifica o rimozione</caption>
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Username</th>
-                            <th scope="col">Password</th>
-                            <th scope="col">Cellulare</th>
-                            <th scope="col">Azioni</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="(user, index) in userList" :key="user.username + index">
-                            <td>{{ user.username }}</td>
-                            <td>{{ user.password }}</td>
-                            <td>{{ user.cellulare }}</td>
-                            <td>
-                                <button class="btn-edit" 
-                                        @click="editUser(index)" 
-                                        :aria-label="'Modifica credenziali utente ' + user.username">Modifica</button>
-                                <button class="btn-delete" 
-                                        @click="deleteUser(index)" 
-                                        :aria-label="'Elimina definitivamente utente ' + user.username">Elimina</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="data-card rounded-2xl p-4 md:p-6">
+                <div class="overflow-x-auto">
+                    <table class="user-table table table-striped table-bordered mb-0">
+                        <caption class="sr-only">Tabella contenente la lista degli utenti registrati nel sistema e le azioni di modifica o rimozione</caption>
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Username</th>
+                                <th scope="col">Password</th>
+                                <th scope="col">Cellulare</th>
+                                <th scope="col">Azioni</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(user, index) in userList" :key="user.username + index">
+                                <td>{{ user.username }}</td>
+                                <td>{{ user.password }}</td>
+                                <td>{{ user.cellulare }}</td>
+                                <td>
+                                    <button class="btn-edit" @click="editUser(index)" :aria-label="'Modifica credenziali utente ' + user.username">Modifica</button>
+                                    <button class="btn-delete" @click="deleteUser(index)" :aria-label="'Elimina definitivamente utente ' + user.username">Elimina</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
+        </section>
     `
 };
 
 // Template root dell'app Vue, con header, footer, router-view e pannello di accessibilità.
 const AppShellTemplate = `
-    <div>
+    <div class="min-h-screen">
         <a href="#main-content" class="sr-only sr-only-focusable">Salta al contenuto principale</a>
 
-        <header>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Menu principale">
-                <router-link to="/" class="navbar-brand" aria-label="Vai alla Home">Progetto</router-link>
+        <header class="sticky top-0 z-40 px-4 py-3 md:px-8">
+            <nav class="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-white/10 bg-slate-900/90 px-4 py-3 shadow-soft backdrop-blur" aria-label="Menu principale">
+                <router-link to="/" class="text-lg font-semibold text-white" aria-label="Vai alla Home">Progetto</router-link>
 
-                <button class="navbar-toggler"
-                        type="button"
-                        data-toggle="collapse"
-                        data-target="#navbarNav"
-                        aria-controls="navbarNav"
-                        aria-expanded="false"
-                        aria-label="Apri o chiudi il menu di navigazione">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item" :class="{ active: $route.path === '/info' }">
-                            <router-link class="nav-link" to="/info">Approfondimento-1</router-link>
-                        </li>
-                        <li class="nav-item" :class="{ active: $route.path === '/info2' }">
-                            <router-link class="nav-link" to="/info2">Approfondimento-2</router-link>
-                        </li>
-                        <li class="nav-item" :class="{ active: $route.path === '/modifica' }">
-                            <router-link class="nav-link" to="/modifica">Modifica dati</router-link>
-                        </li>
-                        <li class="nav-item" :class="{ active: $route.path === '/json' }">
-                            <router-link class="nav-link" to="/json">Database .json</router-link>
-                        </li>
-                    </ul>
+                <div class="flex flex-wrap items-center gap-2">
+                    <router-link class="rounded-full px-3 py-2 text-sm font-medium text-slate-100 transition hover:bg-white/10" to="/info" :class="{ 'bg-white/15 text-white': $route.path === '/info' }">Approfondimento-1</router-link>
+                    <router-link class="rounded-full px-3 py-2 text-sm font-medium text-slate-100 transition hover:bg-white/10" to="/info2" :class="{ 'bg-white/15 text-white': $route.path === '/info2' }">Approfondimento-2</router-link>
+                    <router-link class="rounded-full px-3 py-2 text-sm font-medium text-slate-100 transition hover:bg-white/10" to="/modifica" :class="{ 'bg-white/15 text-white': $route.path === '/modifica' }">Modifica dati</router-link>
+                    <router-link class="rounded-full px-3 py-2 text-sm font-medium text-slate-100 transition hover:bg-white/10" to="/json" :class="{ 'bg-white/15 text-white': $route.path === '/json' }">Database .json</router-link>
                 </div>
 
                 <button class="btn-theme-toggle"
@@ -383,12 +347,12 @@ const AppShellTemplate = `
             </nav>
         </header>
 
-        <main id="main-content" class="container mt-5">
+        <main id="main-content" class="container mx-auto px-4 py-6 md:py-8">
             <router-view></router-view>
         </main>
 
-        <footer class="bg-dark text-white text-center py-3 mt-5">
-            <div class="container">
+        <footer class="mt-8 border-t border-white/10 py-6 text-center text-sm">
+            <div class="container mx-auto px-4">
                 <p class="mb-0">© 2026 Progetto di Salvatore Ciaramidaro</p>
             </div>
         </footer>
@@ -403,7 +367,7 @@ const AppShellTemplate = `
         </button>
 
         <div id="accessibility-panel"
-             class="accessibility-panel"
+             class="accessibility-panel rounded-2xl"
              :class="{ hidden: !showAccessibilityPanel }"
              :aria-hidden="(!showAccessibilityPanel).toString()"
              role="region"
@@ -415,7 +379,7 @@ const AppShellTemplate = `
                 <span aria-hidden="true">✕</span>
             </button>
 
-            <h2>⚙️ Accessibilità</h2>
+            <h2 class="text-lg font-semibold">⚙️ Accessibilità</h2>
 
             <div class="font-size-control">
                 <span id="font-label">Dimensione testo:</span>
@@ -464,15 +428,12 @@ const JsonView = {
         }
     },
     computed: {
-        // Conta quanti record risultano dopo il filtro.
         playersCount() {
             return this.filteredPlayers.length;
         },
-        // Converte i dati filtrati in una stringa JSON leggibile.
         jsonPreview() {
             return JSON.stringify(this.filteredPlayers, null, 2);
         },
-        // Filtra i giocatori in base al cognome digitato dall'utente.
         filteredPlayers() {
             const query = this.searchCognome.trim().toLowerCase();
 
@@ -485,7 +446,6 @@ const JsonView = {
             );
         }
     },
-    // Quando la vista viene caricata, legge i dati dal file dati.json.
     async mounted() {
         try {
             const response = await fetch('dati.json');
@@ -503,22 +463,19 @@ const JsonView = {
     },
 
     template: `
-        <div class="mb-5">
-            <h1>Database .json</h1>
-            <p class="mb-4">La vista legge i dati da <strong>dati.json</strong> e li mostra sia in tabella sia in formato JSON.</p>
-
-            <div class="form-group mb-3">
-                <label for="searchCognome">Cerca per cognome</label>
-                <input
-                    id="searchCognome"
-                    v-model="searchCognome"
-                    type="text"
-                    class="form-control"
-                    placeholder="Scrivi un cognome..."
-                >
+        <section class="page-shell space-y-6">
+            <div class="hero-panel rounded-3xl p-8 md:p-10">
+                <p class="kicker">Database JSON</p>
+                <h1 class="text-3xl md:text-4xl font-semibold mt-2">Database .json</h1>
+                <p class="ciao mt-3 max-w-2xl">La vista legge i dati da <strong>dati.json</strong> e li mostra sia in tabella sia in formato JSON, con un filtro per cognome.</p>
             </div>
 
-            <div aria-live="polite">
+            <div class="section-card rounded-2xl p-6 md:p-8">
+                <label for="searchCognome" class="block mb-2 font-medium">Cerca per cognome</label>
+                <input id="searchCognome" v-model="searchCognome" type="text" class="form-control" placeholder="Scrivi un cognome...">
+            </div>
+
+            <div aria-live="polite" class="space-y-4">
                 <div v-if="loading" class="alert alert-info">Caricamento dati in corso...</div>
                 <div v-else-if="error" class="alert alert-danger">{{ error }}</div>
 
@@ -531,43 +488,45 @@ const JsonView = {
                         Nessun record trovato per il cognome inserito.
                     </div>
 
-                    <div v-if="filteredPlayers.length" class="table-responsive mb-4">
-                        <table class="table table-bordered table-striped">
-                            <caption class="sr-only">Tabella dei giocatori di pallavolo filtrabile per cognome</caption>
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Nome</th>
-                                    <th scope="col">Cognome</th>
-                                    <th scope="col">Numero</th>
-                                    <th scope="col">Ruolo</th>
-                                    <th scope="col">Squadra</th>
-                                    <th scope="col">Sesso</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="player in filteredPlayers" :key="player.id">
-                                    <td>{{ player.id }}</td>
-                                    <td>{{ player.nome }}</td>
-                                    <td>{{ player.cognome }}</td>
-                                    <td>{{ player.numero }}</td>
-                                    <td>{{ player.ruolo }}</td>
-                                    <td>{{ player.squadra_attuale }}</td>
-                                    <td>{{ player.sesso }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div v-if="filteredPlayers.length" class="data-card rounded-2xl p-4 md:p-6">
+                        <div class="overflow-x-auto">
+                            <table class="table table-bordered table-striped mb-0">
+                                <caption class="sr-only">Tabella dei giocatori di pallavolo filtrabile per cognome</caption>
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Nome</th>
+                                        <th scope="col">Cognome</th>
+                                        <th scope="col">Numero</th>
+                                        <th scope="col">Ruolo</th>
+                                        <th scope="col">Squadra</th>
+                                        <th scope="col">Sesso</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="player in filteredPlayers" :key="player.id">
+                                        <td>{{ player.id }}</td>
+                                        <td>{{ player.nome }}</td>
+                                        <td>{{ player.cognome }}</td>
+                                        <td>{{ player.numero }}</td>
+                                        <td>{{ player.ruolo }}</td>
+                                        <td>{{ player.squadra_attuale }}</td>
+                                        <td>{{ player.sesso }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
-                    <details>
-                        <summary class="mb-2">Mostra JSON completo</summary>
-                        <pre class="p-3 bg-light border rounded" style="white-space: pre-wrap;">{{ jsonPreview }}</pre>
+                    <details class="data-card rounded-2xl p-4 md:p-6">
+                        <summary class="mb-2 font-semibold">Mostra JSON completo</summary>
+                        <pre class="mt-3 rounded-xl border border-slate-200/70 bg-slate-950/95 p-4 text-sm text-slate-100" style="white-space: pre-wrap;">{{ jsonPreview }}</pre>
                     </details>
                 </template>
             </div>
-        </div>
+        </section>
     `
-}
+};
 
 // Configurazione del router: ogni path associa una vista diversa.
 const router = createRouter({

@@ -1,4 +1,635 @@
-/* Variabili CSS globali: definiscono colori e parametri base del tema chiaro. */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Lexend:wght@400;500;700&display=swap');
+
+:root {
+    --bg-primary: #f7fafc;
+    --bg-secondary: #ffffff;
+    --bg-accent: #e7f4f1;
+    --text-primary: #14213d;
+    --text-secondary: #2f3d58;
+    --border-color: #cdd8e7;
+    --shadow-soft: 0 10px 28px rgba(20, 33, 61, 0.12);
+    --table-header-bg: linear-gradient(140deg, #0f4c5c 0%, #1f8a70 100%);
+    --table-header-text: #ffffff;
+    --table-row-hover: #eefaf6;
+    --table-row-alt: #f4f9ff;
+    --navbar-bg: rgba(20, 33, 61, 0.94);
+    --navbar-text: #ffffff;
+    --input-bg: #ffffff;
+    --input-border: #b8c8de;
+    --focus-color: #ff6b35;
+    --cta: #ff6b35;
+    --cta-hover: #e85b2a;
+    --success-bg: #e8f7ef;
+}
+
+html[data-theme="dark"] {
+    --bg-primary: #121826;
+    --bg-secondary: #1d2740;
+    --bg-accent: #24314f;
+    --text-primary: #ecf2ff;
+    --text-secondary: #c4d2ee;
+    --border-color: #374867;
+    --shadow-soft: 0 10px 28px rgba(0, 0, 0, 0.42);
+    --table-header-bg: linear-gradient(140deg, #16697a 0%, #489fb5 100%);
+    --table-header-text: #ffffff;
+    --table-row-hover: #2b3a5d;
+    --table-row-alt: #22304f;
+    --navbar-bg: rgba(8, 12, 20, 0.96);
+    --navbar-text: #ecf2ff;
+    --input-bg: #18233b;
+    --input-border: #44557a;
+    --focus-color: #ff9f6e;
+    --cta: #ff9f43;
+    --cta-hover: #ff8a24;
+    --success-bg: #223c34;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background:
+        radial-gradient(circle at 90% 8%, rgba(31, 138, 112, 0.17) 0%, rgba(31, 138, 112, 0) 42%),
+        radial-gradient(circle at 8% 20%, rgba(255, 107, 53, 0.16) 0%, rgba(255, 107, 53, 0) 36%),
+        var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Lexend', 'Trebuchet MS', sans-serif;
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1 0 auto;
+    margin-bottom: 24px;
+    animation: page-enter 0.5s ease both;
+}
+
+@keyframes page-enter {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--text-primary);
+    font-family: 'Fraunces', Georgia, serif;
+}
+
+h1 {
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.02em;
+}
+
+h2 {
+    margin-bottom: 1rem;
+}
+
+.ciao {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+.img-fluid {
+    display: block;
+    max-width: 100%;
+    width: min(100%, 680px);
+    height: auto;
+    margin: 15px auto;
+    border-radius: 14px;
+}
+
+.navbar {
+    background-color: var(--navbar-bg) !important;
+    backdrop-filter: blur(7px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-brand,
+.nav-link {
+    color: var(--navbar-text) !important;
+}
+
+.navbar-brand {
+    font-family: 'Fraunces', Georgia, serif;
+    letter-spacing: 0.03em;
+}
+
+.nav-link {
+    border-radius: 999px;
+    padding: 0.45rem 0.9rem !important;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+    transform: translateY(-1px);
+}
+
+.nav-item.active .nav-link {
+    color: #ffffff !important;
+    font-weight: 700;
+    border-bottom: 2px solid var(--focus-color);
+}
+
+.btn-theme-toggle {
+    background-color: transparent;
+    border: 2px solid var(--navbar-text);
+    color: var(--navbar-text);
+    padding: 8px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.25s ease;
+    margin-left: auto;
+    margin-right: 15px;
+}
+
+.btn-theme-toggle:hover {
+    background-color: var(--navbar-text);
+    color: var(--navbar-bg);
+}
+
+footer {
+    position: static;
+    width: 100%;
+    background-color: var(--navbar-bg);
+    color: var(--navbar-text);
+    text-align: center;
+    padding: 12px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.card {
+    background: linear-gradient(150deg, var(--bg-secondary) 0%, var(--bg-accent) 100%);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    box-shadow: var(--shadow-soft);
+}
+
+.card p {
+    color: var(--text-primary);
+}
+
+.form-control,
+.input-group .form-control {
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    border: 2px solid var(--input-border);
+    border-radius: 10px;
+}
+
+.form-control:focus,
+.input-group .form-control:focus {
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    border-color: var(--focus-color);
+    box-shadow: 0 0 0 0.2rem rgba(255, 107, 53, 0.24);
+}
+
+.input-group .btn-outline-secondary {
+    color: var(--text-primary);
+    border-color: var(--input-border);
+}
+
+.input-group .btn-outline-secondary:hover {
+    background-color: var(--focus-color);
+    border-color: var(--focus-color);
+    color: #ffffff;
+}
+
+.btn-primary,
+.btn-edit,
+.btn-delete {
+    border: none;
+    border-radius: 999px;
+    padding: 0.45rem 1rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-primary {
+    background-color: var(--cta);
+}
+
+.btn-primary:hover {
+    background-color: var(--cta-hover);
+}
+
+.btn-edit {
+    background-color: #f59e0b;
+    color: #ffffff;
+    margin-right: 10px;
+}
+
+.btn-edit:hover {
+    background-color: #d98406;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: #ffffff;
+    margin-left: 10px;
+}
+
+.btn-delete:hover {
+    background-color: #bd2130;
+}
+
+.btn-primary:hover,
+.btn-edit:hover,
+.btn-delete:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+}
+
+.cerca_giocatori {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid var(--input-border);
+    border-radius: 10px;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    transition: border-color 0.3s ease;
+}
+
+.cerca_giocatori:focus {
+    outline: none;
+    border-color: var(--focus-color);
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.24);
+}
+
+.tabella,
+.user-table,
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: var(--shadow-soft);
+    border-radius: 14px;
+    overflow: hidden;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.tabella thead,
+.table thead,
+.thead-dark {
+    background: var(--table-header-bg) !important;
+    color: var(--table-header-text) !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.82rem;
+    letter-spacing: 0.05em;
+}
+
+.tabella th,
+.table th {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.tabella td,
+.table td {
+    padding: 14px;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+.tabella tbody tr,
+.table tbody tr {
+    transition: background-color 0.2s ease;
+    background-color: var(--bg-primary);
+}
+
+.tabella tbody tr:nth-child(even),
+.table tbody tr:nth-child(even) {
+    background-color: var(--table-row-alt);
+}
+
+.tabella tbody tr:hover,
+.table tbody tr:hover {
+    background-color: var(--table-row-hover);
+}
+
+.tabella tbody tr:last-child td,
+.table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.alert-success {
+    background-color: var(--success-bg);
+    border-color: rgba(31, 138, 112, 0.35);
+    color: var(--text-primary);
+}
+
+details {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 12px;
+}
+
+summary {
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.accessibility-btn {
+    position: fixed;
+    bottom: 72px;
+    right: 20px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background-color: var(--cta);
+    color: #ffffff;
+    border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+    box-shadow: 0 8px 18px rgba(20, 33, 61, 0.35);
+    z-index: 1020;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.accessibility-btn:hover {
+    background-color: var(--cta-hover);
+    transform: scale(1.06);
+}
+
+.accessibility-panel {
+    position: fixed;
+    bottom: 72px;
+    right: 20px;
+    width: 320px;
+    background-color: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    box-shadow: var(--shadow-soft);
+    z-index: 1025;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 78vh;
+    overflow-y: auto;
+}
+
+body {
+    line-height: 1.65;
+}
+
+::selection {
+    background-color: rgba(255, 107, 53, 0.24);
+    color: var(--text-primary);
+}
+
+.page-shell {
+    padding: 1.25rem 0 2.5rem;
+}
+
+.hero-panel,
+.section-card,
+.data-card {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.92), rgba(231, 244, 241, 0.92));
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(12px);
+    box-shadow: var(--shadow-soft);
+}
+
+html[data-theme="dark"] .hero-panel,
+html[data-theme="dark"] .section-card,
+html[data-theme="dark"] .data-card {
+    background: linear-gradient(145deg, rgba(29, 39, 64, 0.95), rgba(36, 49, 79, 0.95));
+}
+
+.shadow-soft {
+    box-shadow: var(--shadow-soft);
+}
+
+.kicker {
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--cta);
+}
+
+.soft-pill {
+    background: rgba(31, 138, 112, 0.12);
+    border: 1px solid rgba(31, 138, 112, 0.2);
+    color: var(--text-primary);
+}
+
+.info-list li {
+    margin-bottom: 0.55rem;
+}
+
+.accessibility-panel.hidden {
+    display: none;
+}
+
+.accessibility-panel h2 {
+    margin: 0 0 12px 0;
+    font-size: 1.2rem;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 8px;
+}
+
+.accessibility-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: var(--bg-accent);
+}
+
+.accessibility-option input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+}
+
+.accessibility-option label {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    flex: 1;
+}
+
+.font-size-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background-color: var(--bg-accent);
+    border-radius: 8px;
+}
+
+.font-size-control button {
+    background-color: #0f4c5c;
+    color: #ffffff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.font-size-control button:hover {
+    background-color: #0a3945;
+}
+
+.font-size-control button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+.font-size-value {
+    color: var(--text-primary);
+    font-weight: 700;
+    min-width: 52px;
+    text-align: center;
+}
+
+.accessibility-panel-close {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+    color: var(--text-primary);
+    padding: 5px;
+}
+
+.accessibility-panel-close:hover {
+    opacity: 0.7;
+}
+
+button:focus-visible,
+input:focus-visible,
+a:focus-visible,
+summary:focus-visible {
+    outline: 2px solid var(--focus-color);
+    outline-offset: 2px;
+}
+
+html.high-contrast {
+    --bg-primary: #000000;
+    --bg-secondary: #111111;
+    --bg-accent: #111111;
+    --text-primary: #ffff00;
+    --text-secondary: #ffffff;
+    --border-color: #ffff00;
+    --table-header-bg: #000000;
+    --table-header-text: #ffff00;
+    --table-row-hover: #1a1a1a;
+    --table-row-alt: #0d0d0d;
+    --navbar-bg: #000000;
+    --navbar-text: #ffff00;
+    --input-bg: #000000;
+    --input-border: #ffff00;
+    --focus-color: #ffff00;
+    --cta: #ffff00;
+    --cta-hover: #d6d600;
+}
+
+html.high-contrast body,
+html.high-contrast input,
+html.high-contrast textarea,
+html.high-contrast .card,
+html.high-contrast details {
+    border: 2px solid #ffff00;
+}
+
+html.reduced-motion,
+html.reduced-motion * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+}
+
+html.font-size-large {
+    font-size: 18px;
+}
+
+html.font-size-xlarge {
+    font-size: 20px;
+}
+
+html.font-size-huge {
+    font-size: 22px;
+}
+
+html.dyslexia-font,
+html.dyslexia-font body,
+html.dyslexia-font * {
+    font-family: 'Lexend', 'Trebuchet MS', sans-serif !important;
+}
+
+@media (max-width: 991.98px) {
+    .navbar-nav {
+        margin-top: 10px;
+        gap: 4px;
+    }
+
+    .btn-theme-toggle {
+        margin: 10px 0 0 0;
+        width: 100%;
+    }
+}
+
+@media (max-width: 767.98px) {
+    main.container {
+        margin-top: 1.5rem !important;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .accessibility-panel {
+        right: 12px;
+        left: 12px;
+        width: auto;
+        bottom: 82px;
+    }
+
+    .accessibility-btn {
+        right: 14px;
+    }
+
+    .table th,
+    .table td,
+    .tabella th,
+    .tabella td {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+}/* Variabili CSS globali: definiscono colori e parametri base del tema chiaro. */
 :root {
     --bg-primary: #ffffff;
     --bg-secondary: #f8f9fa;
