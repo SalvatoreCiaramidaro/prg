@@ -467,7 +467,7 @@ const JsonView = {
             <div class="hero-panel rounded-3xl p-8 md:p-10">
                 <p class="kicker">Database JSON</p>
                 <h1 class="text-3xl md:text-4xl font-semibold mt-2">Database .json</h1>
-                <p class="ciao mt-3 max-w-2xl">La vista legge i dati da <strong>dati.json</strong> e li mostra sia in tabella sia in formato JSON, con un filtro per cognome.</p>
+                <p class="ciao mt-3 max-w-2xl">La vista legge i dati da <strong>dati.json</strong> e li mostra sia in tabella sia in formato JSON, con un filtro per cognome tra i piloti di Formula 1.</p>
             </div>
 
             <div class="section-card rounded-2xl p-6 md:p-8">
@@ -491,7 +491,7 @@ const JsonView = {
                     <div v-if="filteredPlayers.length" class="data-card rounded-2xl p-4 md:p-6">
                         <div class="overflow-x-auto">
                             <table class="table table-bordered table-striped mb-0">
-                                <caption class="sr-only">Tabella dei giocatori di pallavolo filtrabile per cognome</caption>
+                                <caption class="sr-only">Tabella dei piloti di Formula 1 filtrabile per cognome</caption>
                                 <thead class="thead-dark">
                                     <tr>
                                         <th scope="col">ID</th>
