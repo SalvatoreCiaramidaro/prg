@@ -205,8 +205,8 @@ const ModificaView = {
     data() {
         return {
             userList: [
-                { username: 'admin', password: '123', cellulare: '3334455666' },
-                { username: 'alberto_p', password: 'web', cellulare: '3409988777' }
+                { username: 'admin', password: 'Admin123', cellulare: '3334455666' },
+                { username: 'salvatore_c', password: 'Web1234', cellulare: '3402276218' }
             ],
             newUser: { username: '', password: '', cellulare: '' },
             editIndex: null
@@ -217,15 +217,32 @@ const ModificaView = {
             this.newUser = { username: '', password: '', cellulare: '' };
             this.editIndex = null;
         },
-        saveUser() {
+        // La validazione di username, password e cellulare è affidata agli attributi
+        // HTML5 "pattern" e "required" presenti nel form (nessun alert JS).
+        // Per la password aggiungiamo anche un controllo esplicito via JS che imposta
+        // l'invalidità del campo con setCustomValidity(): il messaggio mostrato è
+        // comunque il fumetto NATIVO del browser (reportValidity()), non un alert custom.
+        // Questo copre anche eventuali browser che non applicano correttamente "pattern"
+        // sui campi type="password".
+        saveUser(event) {
+            const form = event.target;
+            const passwordEl = this.$refs.passwordInput;
+            const passwordRule = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9@#$%&*!?._-]{6,20}$/;
+
+            if (!passwordRule.test(this.newUser.password)) {
+                passwordEl.setCustomValidity('La password deve avere almeno 6 caratteri, con almeno una maiuscola e un numero.');
+            } else {
+                passwordEl.setCustomValidity('');
+            }
+
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
             const username = this.newUser.username.trim();
             const password = this.newUser.password.trim();
             const cellulare = this.newUser.cellulare.trim();
-
-            if (!username || !password || !cellulare) {
-                alert('Compila tutti i campi prima di salvare.');
-                return;
-            }
 
             const payload = { username, password, cellulare };
 
@@ -268,29 +285,34 @@ const ModificaView = {
             <div class="section-card rounded-2xl p-6 md:p-8">
                 <h2 class="text-2xl font-semibold mb-4">{{ editIndex === null ? 'Aggiungi nuovo utente' : 'Modifica utente' }}</h2>
 
-                <div class="grid gap-4 md:grid-cols-3">
-                    <div>
-                        <label for="username" class="block mb-2 font-medium">Username</label>
-                        <input id="username" v-model="newUser.username" type="text" class="form-control" placeholder="Inserisci username">
+                <form @submit.prevent="saveUser">
+                    <div class="grid gap-4 md:grid-cols-3">
+                        <div>
+                            <label for="username" class="block mb-2 font-medium">Username</label>
+                            <input id="username" v-model="newUser.username" type="text" class="form-control" placeholder="Inserisci username" pattern="[A-Za-z0-9_]{3,20}" title="Da 3 a 20 caratteri: lettere, numeri o underscore." maxlength="20" required>
+                            <small class="form-text text-muted mt-2">Esempio: marco_rossi</small>
+                        </div>
+                        <div>
+                            <label for="password" class="block mb-2 font-medium">Password</label>
+                            <input id="password" ref="passwordInput" v-model="newUser.password" type="password" class="form-control" placeholder="Inserisci password" title="Da 6 a 20 caratteri, con almeno una maiuscola, una minuscola e un numero." maxlength="20" required>
+                            <small class="form-text text-muted mt-2">Usa lettere, numeri e almeno una maiuscola.</small>
+                        </div>
+                        <div>
+                            <label for="cellulare" class="block mb-2 font-medium">Cellulare</label>
+                            <input id="cellulare" v-model="newUser.cellulare" type="text" class="form-control" placeholder="Inserisci numero di cellulare" pattern="3[0-9]{9}" inputmode="numeric" maxlength="10" title="10 cifre, deve iniziare con 3." required>
+                            <small class="form-text text-muted mt-2">Esempio: 3334455666</small>
+                        </div>
                     </div>
-                    <div>
-                        <label for="password" class="block mb-2 font-medium">Password</label>
-                        <input id="password" v-model="newUser.password" type="text" class="form-control" placeholder="Inserisci password">
-                    </div>
-                    <div>
-                        <label for="cellulare" class="block mb-2 font-medium">Cellulare</label>
-                        <input id="cellulare" v-model="newUser.cellulare" type="text" class="form-control" placeholder="Inserisci numero di cellulare">
-                    </div>
-                </div>
 
-                <div class="mt-5 flex flex-wrap gap-3">
-                    <button class="btn btn-primary" @click="saveUser">
-                        {{ editIndex === null ? 'Aggiungi utente' : 'Salva modifiche' }}
-                    </button>
-                    <button v-if="editIndex !== null" class="btn btn-secondary" @click="resetForm">
-                        Annulla modifica
-                    </button>
-                </div>
+                    <div class="mt-5 flex flex-wrap gap-3">
+                        <button type="submit" class="btn btn-primary">
+                            {{ editIndex === null ? 'Aggiungi utente' : 'Salva modifiche' }}
+                        </button>
+                        <button v-if="editIndex !== null" type="button" class="btn btn-secondary" @click="resetForm">
+                            Annulla modifica
+                        </button>
+                    </div>
+                </form>
             </div>
 
             <div class="data-card rounded-2xl p-4 md:p-6">
