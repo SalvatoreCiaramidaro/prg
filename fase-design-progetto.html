@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Fase di Design – Progetto Salvatore Ciaramidaro</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Lexend:wght@400;500;700&display=swap');
+
+  :root{
+    --bg-primary:#f7fafc; --bg-secondary:#ffffff; --bg-accent:#e7f4f1;
+    --text-primary:#14213d; --text-secondary:#2f3d58; --border-color:#cdd8e7;
+    --header-grad:linear-gradient(140deg,#0f4c5c 0%,#1f8a70 100%);
+    --navbar-bg:rgba(20,33,61,0.94); --cta:#ff6b35; --cta-hover:#e85b2a;
+    --shadow:0 10px 28px rgba(20,33,61,.12);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; font-family:'Lexend',sans-serif; color:var(--text-primary);
+    background:var(--bg-primary); padding:28px 16px 60px;
+  }
+  .sheet{max-width:1180px;margin:0 auto;}
+  h1,h2,h3{font-family:'Fraunces',Georgia,serif; color:var(--text-primary); margin:0;}
+  .doc-header{
+    background:var(--header-grad); color:#fff; border-radius:20px;
+    padding:22px 28px; margin-bottom:22px; box-shadow:var(--shadow);
+    display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:10px;
+  }
+  .doc-header h1{font-size:1.6rem; color:#fff;}
+  .doc-header p{margin:4px 0 0; opacity:.92; font-size:.92rem;}
+  .kicker{
+    text-transform:uppercase; letter-spacing:.08em; font-size:.72rem;
+    font-weight:700; opacity:.85;
+  }
+  section{
+    background:var(--bg-secondary); border:1px solid var(--border-color);
+    border-radius:18px; padding:20px 24px; margin-bottom:18px; box-shadow:var(--shadow);
+  }
+  section h2{font-size:1.15rem; margin-bottom:12px; display:flex; align-items:center; gap:8px;}
+  section h2 .num{
+    background:var(--cta); color:#fff; font-family:'Lexend'; font-size:.75rem;
+    font-weight:700; width:22px; height:22px; border-radius:50%;
+    display:inline-flex; align-items:center; justify-content:center;
+  }
+  p{font-size:.88rem; line-height:1.5; color:var(--text-secondary); margin:.3em 0;}
+  .goals{display:flex; gap:10px; flex-wrap:wrap; margin-top:8px;}
+  .pill{
+    background:var(--bg-accent); border:1px solid var(--border-color);
+    border-radius:999px; padding:5px 14px; font-size:.78rem; font-weight:600;
+    color:var(--text-primary);
+  }
+  .process-steps{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:10px;}
+  .step{
+    background:var(--bg-accent); border-radius:12px; padding:12px 14px; font-size:.8rem;
+    border:1px solid var(--border-color); position:relative;
+  }
+  .step b{display:block; font-family:'Fraunces',serif; font-size:.85rem; margin-bottom:4px;}
+  .note{
+    background:#fff3ea; border:1px solid #ffd8bd; border-radius:10px;
+    padding:8px 12px; font-size:.76rem; color:#7a3b13; margin-top:10px;
+  }
+  .personas{display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
+  .persona{
+    border:1px solid var(--border-color); border-radius:14px; padding:14px;
+    background:linear-gradient(180deg,#fff, var(--bg-accent) 220%);
+  }
+  .persona .avatar{
+    width:38px;height:38px;border-radius:50%;background:var(--header-grad);
+    color:#fff; display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces',serif; font-weight:700; margin-bottom:8px;
+  }
+  .persona h3{font-size:.98rem;}
+  .persona .role{font-size:.72rem; color:var(--cta); font-weight:700; text-transform:uppercase; letter-spacing:.03em;}
+  .persona ul{margin:8px 0 0; padding-left:16px; font-size:.78rem; color:var(--text-secondary);}
+  .persona li{margin-bottom:4px;}
+  .persona .scenario{
+    margin-top:8px; font-size:.76rem; font-style:italic; color:var(--text-primary);
+    border-top:1px dashed var(--border-color); padding-top:8px;
+  }
+
+  /* ---- mockup frames ---- */
+  .mockup-row{display:flex; gap:24px; align-items:flex-start; flex-wrap:wrap;}
+  .frame-label{font-size:.78rem; font-weight:700; color:var(--text-primary); margin-bottom:8px; display:flex; align-items:center; gap:6px;}
+  .frame-label .tag{background:var(--bg-accent); border-radius:6px; padding:1px 8px; font-size:.68rem; color:var(--cta); border:1px solid var(--border-color);}
+
+  .desktop-frame{
+    flex:1 1 640px; border-radius:12px; overflow:hidden; border:1px solid var(--border-color);
+    box-shadow:var(--shadow); background:#0b1220;
+  }
+  .desktop-bar{
+    background:#1c2333; padding:8px 12px; display:flex; align-items:center; gap:6px;
+  }
+  .desktop-bar span{width:9px;height:9px;border-radius:50%; background:#4a5570; display:inline-block;}
+  .desktop-screen{ background:var(--bg-primary); padding:14px;}
+
+  .phone-frame{
+    width:220px; border:8px solid #14213d; border-radius:28px; overflow:hidden;
+    box-shadow:var(--shadow); flex-shrink:0;
+  }
+  .phone-notch{height:16px; background:#14213d; display:flex; justify-content:center; align-items:center;}
+  .phone-notch::after{content:""; width:50px; height:6px; background:#000; border-radius:4px;}
+  .phone-screen{background:var(--bg-primary); min-height:400px; padding:8px;}
+
+  .mini-nav{
+    background:var(--navbar-bg); color:#fff; border-radius:999px;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:6px 10px; font-size:.62rem; font-weight:600; margin-bottom:8px; flex-wrap:wrap; gap:4px;
+  }
+  .mini-nav .brand{font-family:'Fraunces',serif; font-size:.68rem;}
+  .mini-nav .links{display:flex; gap:4px; flex-wrap:wrap;}
+  .mini-nav .links span{background:rgba(255,255,255,.12); padding:2px 7px; border-radius:999px;}
+  .mini-nav .links span.active{background:rgba(255,255,255,.22); border-bottom:2px solid var(--cta);}
+  .mini-nav .theme{background:rgba(255,255,255,.12); border-radius:50%; width:16px; height:16px; display:flex; align-items:center; justify-content:center; font-size:.6rem;}
+
+  .mini-hero{
+    background:var(--header-grad); color:#fff; border-radius:10px; padding:10px;
+    margin-bottom:8px;
+  }
+  .mini-hero .kicker-mini{font-size:.55rem; opacity:.85; text-transform:uppercase; letter-spacing:.05em;}
+  .mini-hero h4{margin:3px 0; font-family:'Fraunces',serif; font-size:.78rem;}
+  .mini-hero p{font-size:.6rem; color:#e7f4f1; margin:0; line-height:1.3;}
+  .mini-hero .tags{display:flex; gap:3px; margin-top:6px; flex-wrap:wrap;}
+  .mini-hero .tags span{background:rgba(255,255,255,.18); border-radius:999px; padding:1px 6px; font-size:.52rem;}
+
+  .mini-cards{display:grid; gap:6px;}
+  .desktop-screen .mini-cards{grid-template-columns:repeat(3,1fr);}
+  .phone-screen .mini-cards{grid-template-columns:1fr;}
+  .mini-card{
+    background:#fff; border:1px solid var(--border-color); border-radius:8px; padding:7px;
+  }
+  .mini-card b{font-size:.62rem; font-family:'Fraunces',serif; display:block; margin-bottom:2px;}
+  .mini-card span{font-size:.55rem; color:var(--text-secondary); line-height:1.3; display:block;}
+
+  .mini-fab{
+    width:22px; height:22px; border-radius:50%; background:var(--header-grad); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:.6rem; margin-top:8px; margin-left:auto;
+  }
+
+  /* gestione utenti mini mockup */
+  .mini-form{background:#fff; border:1px solid var(--border-color); border-radius:8px; padding:8px; margin-bottom:6px;}
+  .mini-form b{font-size:.6rem; font-family:'Fraunces',serif; display:block; margin-bottom:6px;}
+  .mini-field{margin-bottom:5px;}
+  .mini-field label{font-size:.5rem; color:var(--text-secondary); display:block; margin-bottom:2px;}
+  .mini-field .box{background:var(--bg-primary); border:1px solid var(--border-color); border-radius:5px; height:14px;}
+  .mini-btn{background:var(--cta); color:#fff; border-radius:999px; font-size:.55rem; padding:3px 10px; display:inline-block; font-weight:700;}
+  .mini-table{width:100%; border-collapse:collapse; font-size:.52rem; background:#fff; border-radius:6px; overflow:hidden;}
+  .mini-table th{background:var(--header-grad); color:#fff; padding:4px 5px; text-align:left;}
+  .mini-table td{padding:4px 5px; border-bottom:1px solid var(--border-color); color:var(--text-secondary);}
+
+  .compare{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:6px;}
+  .compare .col h4{font-size:.78rem; margin:0 0 6px; font-family:'Fraunces',serif;}
+  .compare .v0 h4{color:#94a3b8;}
+  .compare .v1 h4{color:#1f8a70;}
+  .compare ul{margin:0; padding-left:16px; font-size:.76rem; color:var(--text-secondary); line-height:1.5;}
+
+  .changelog{display:grid; gap:8px;}
+  .change{
+    display:grid; grid-template-columns:26px 1fr; gap:10px; align-items:flex-start;
+    border-left:3px solid var(--cta); padding:4px 0 4px 10px;
+  }
+  .change .n{
+    background:var(--cta); color:#fff; width:22px; height:22px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-size:.68rem; font-weight:700;
+  }
+  .change b{font-size:.82rem;}
+  .change span.persona-tag{
+    background:var(--bg-accent); border:1px solid var(--border-color); border-radius:999px;
+    font-size:.65rem; padding:1px 8px; margin-left:6px; color:var(--cta); font-weight:700;
+  }
+
+  footer{text-align:center; font-size:.72rem; color:var(--text-secondary); margin-top:10px;}
+
+  @media (max-width: 900px){
+    .process-steps{grid-template-columns:1fr 1fr;}
+    .personas{grid-template-columns:1fr;}
+    .compare{grid-template-columns:1fr;}
+    .desktop-screen .mini-cards{grid-template-columns:1fr;}
+  }
+  @media print{
+    body{background:#fff; padding:0;}
+    section{box-shadow:none;}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="doc-header">
+    <div>
+      <p class="kicker">Fondamenti di Sistemi Web — AA 2025/26</p>
+      <h1>Fase di Design — Documentazione del processo</h1>
+      <p>Progetto di Salvatore Ciaramidaro</p>
+    </div>
+    <div class="goals">
+      <span class="pill">📱 Mobile First</span>
+      <span class="pill">👤 User Centered</span>
+      <span class="pill">♿ Accessibile</span>
+    </div>
+  </div>
+
+  <section>
+    <h2><span class="num">1</span> Metodologia seguita</h2>
+    <p>Progetto sviluppato individualmente: in assenza di un gruppo per un vero focus group, il design è stato validato con un <b>walkthrough cognitivo individuale</b> sulle euristiche di Nielsen e sulle linee guida WCAG 2.1&nbsp;AA, applicato agli scenari delle 3 personas qui sotto.</p>
+    <div class="process-steps">
+      <div class="step"><b>1 · Personas &amp; scenari</b>Definiti 3 profili utente a partire dalle funzionalità richieste dal corso (contenuti teorici, CRUD utenti, dataset JSON).</div>
+      <div class="step"><b>2 · Mockup iniziale</b>Layout mobile-first prodotto seguendo le linee guida di progettazione (gerarchia visiva, contrasto, breakpoint Tailwind).</div>
+      <div class="step"><b>3 · Walkthrough individuale</b>Simulazione dei 3 scenari sul mockup, applicando euristiche di usabilità e checklist di accessibilità.</div>
+      <div class="step"><b>4 · Iterazione</b>Mockup finale corretto in base ai problemi rilevati (sez. 4).</div>
+    </div>
+    <div class="note">Nota per la discussione: non avendo potuto coinvolgere altri utenti (progetto individuale), il "focus group di controllo" degli esempi del corso è stato sostituito con un'autovalutazione strutturata sulle 3 personas — punto dichiarato esplicitamente qui per trasparenza sul processo.</div>
+  </section>
+
+  <section>
+    <h2><span class="num">2</span> Personas &amp; Scenari</h2>
+    <div class="personas">
+      <div class="persona">
+        <div class="avatar">M</div>
+        <h3>Marco, 24</h3>
+        <div class="role">Studente universitario</div>
+        <ul>
+          <li>Ripassa i concetti da smartphone tra una lezione e l'altra</li>
+          <li>Vuole contenuti scansionabili, non muri di testo</li>
+        </ul>
+        <div class="scenario">"Apro il sito da mobile in pausa pranzo per rivedere i pilastri del Model Context Protocol prima dell'esame."</div>
+      </div>
+      <div class="persona">
+        <div class="avatar">G</div>
+        <h3>Giulia, 45</h3>
+        <div class="role">Valutatrice del progetto</div>
+        <ul>
+          <li>Testa da desktop le funzionalità interattive</li>
+          <li>Verifica la qualità dei feedback di validazione</li>
+        </ul>
+        <div class="scenario">"Accedo da desktop, provo ad aggiungere/modificare un utente e controllo che il form segnali errori in modo chiaro."</div>
+      </div>
+      <div class="persona">
+        <div class="avatar">L</div>
+        <h3>Luca, 30</h3>
+        <div class="role">Utente con lieve ipovisione</div>
+        <ul>
+          <li>Naviga da mobile, usa spesso lo zoom</li>
+          <li>Ha bisogno di alto contrasto e testo ridimensionabile</li>
+        </ul>
+        <div class="scenario">"Visito la tabella dei piloti F1, alzo la dimensione del testo e attivo l'alto contrasto dal pannello accessibilità."</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">3</span> Mockup ad alta fedeltà — Home</h2>
+    <div class="mockup-row">
+      <div>
+        <div class="frame-label">Desktop <span class="tag">≥1024px</span></div>
+        <div class="desktop-frame">
+          <div class="desktop-bar"><span></span><span></span><span></span></div>
+          <div class="desktop-screen">
+            <div class="mini-nav">
+              <span class="brand">Progetto</span>
+              <div class="links">
+                <span class="active">Approfondimento-1</span><span>Approfondimento-2</span><span>Modifica dati</span><span>Database .json</span>
+              </div>
+              <span class="theme">🌙</span>
+            </div>
+            <div class="mini-hero">
+              <div class="kicker-mini">Corso Fondamenti di Sistemi Web</div>
+              <h4>Benvenuto nel progetto di Salvatore Ciaramidaro</h4>
+              <p>Contenuti teorici, gestione utenti interattiva e database JSON in un layout moderno.</p>
+              <div class="tags"><span>Vue</span><span>Model Context Protocol</span><span>Accessibilità</span></div>
+            </div>
+            <div class="mini-cards">
+              <div class="mini-card"><b>Pagine informative</b><span>Approfondimenti sul MCP, layout scansionabile.</span></div>
+              <div class="mini-card"><b>Gestione utenti</b><span>Aggiungi, modifica, elimina record.</span></div>
+              <div class="mini-card"><b>Dati JSON</b><span>Consulta e filtra il dataset esterno.</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="frame-label">Mobile <span class="tag">&lt;768px</span></div>
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="mini-nav" style="flex-direction:column; align-items:flex-start;">
+              <div style="display:flex; justify-content:space-between; width:100%;">
+                <span class="brand">Progetto</span><span class="theme">🌙</span>
+              </div>
+              <div class="links"><span class="active">Approf.-1</span><span>Approf.-2</span><span>Modifica</span><span>JSON</span></div>
+            </div>
+            <div class="mini-hero">
+              <div class="kicker-mini">Corso FSW</div>
+              <h4>Benvenuto nel progetto</h4>
+              <p>Contenuti teorici, gestione utenti e database JSON.</p>
+              <div class="tags"><span>Vue</span><span>MCP</span><span>Accessibilità</span></div>
+            </div>
+            <div class="mini-cards">
+              <div class="mini-card"><b>Pagine informative</b><span>Approfondimenti sul MCP.</span></div>
+              <div class="mini-card"><b>Gestione utenti</b><span>Aggiungi/modifica record.</span></div>
+              <div class="mini-card"><b>Dati JSON</b><span>Consulta il dataset.</span></div>
+            </div>
+            <div class="mini-fab">♿</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">4</span> Iterazione — Gestione utenti, prima e dopo il walkthrough</h2>
+    <div class="compare">
+      <div class="col v0">
+        <h4>v1 · Mockup iniziale</h4>
+        <ul>
+          <li>Form utenti a colonna singola, senza indicazioni sul formato atteso</li>
+          <li>Nessun messaggio di errore visibile in caso di dato non valido</li>
+          <li>Tabella utenti senza etichette accessibili sui pulsanti azione</li>
+        </ul>
+      </div>
+      <div class="col v1">
+        <h4>v2 · Dopo il walkthrough (finale)</h4>
+        <ul>
+          <li>Form a griglia 3 colonne su desktop, 1 su mobile, con testo di aiuto sotto ogni campo</li>
+          <li>Validazione HTML5 (<code>pattern</code>, <code>required</code>) + messaggio nativo chiaro</li>
+          <li><code>aria-label</code> dedicato su ogni pulsante "Modifica"/"Elimina"</li>
+        </ul>
+      </div>
+    </div>
+    <div class="mockup-row" style="margin-top:14px;">
+      <div style="flex:1 1 300px;">
+        <div class="frame-label">Anteprima form (v2)</div>
+        <div class="mini-form">
+          <b>Aggiungi nuovo utente</b>
+          <div class="mini-field"><label>Username · es. marco_rossi</label><div class="box"></div></div>
+          <div class="mini-field"><label>Password · min 6 caratteri, 1 maiuscola, 1 numero</label><div class="box"></div></div>
+          <div class="mini-field"><label>Cellulare · 10 cifre, inizia con 3</label><div class="box"></div></div>
+          <span class="mini-btn">Aggiungi utente</span>
+        </div>
+      </div>
+      <div style="flex:1 1 300px;">
+        <div class="frame-label">Anteprima tabella (v2)</div>
+        <table class="mini-table">
+          <thead><tr><th>Username</th><th>Cellulare</th><th>Azioni</th></tr></thead>
+          <tbody>
+            <tr><td>admin</td><td>333 445 5666</td><td>✏️ 🗑️</td></tr>
+            <tr><td>salvatore_c</td><td>340 227 6218</td><td>✏️ 🗑️</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">5</span> Changelog di design</h2>
+    <div class="changelog">
+      <div class="change"><div class="n">1</div><div><b>Navbar a pillole con stato attivo evidenziato</b><span class="persona-tag">Marco</span><p style="margin:4px 0 0;">Orientamento più immediato tra le 5 sezioni durante la navigazione da mobile.</p></div></div>
+      <div class="change"><div class="n">2</div><div><b>Validazione form con messaggi nativi e testo di aiuto</b><span class="persona-tag">Giulia</span><p style="margin:4px 0 0;">Riduce gli errori di inserimento e chiarisce il formato atteso di ogni campo.</p></div></div>
+      <div class="change"><div class="n">3</div><div><b>Pannello di accessibilità dedicato</b><span class="persona-tag">Luca</span><p style="margin:4px 0 0;">Controllo dimensione testo, alto contrasto, riduzione animazioni, font per dislessia, sottolineatura link — tutto persistente via localStorage.</p></div></div>
+      <div class="change"><div class="n">4</div><div><b>Skip-link e <code>aria-label</code> su ogni azione interattiva</b><span class="persona-tag">Luca</span><p style="margin:4px 0 0;">Migliora la navigazione da tastiera e con screen reader.</p></div></div>
+      <div class="change"><div class="n">5</div><div><b>Layout responsive mobile-first (Tailwind <code>md:</code>/<code>lg:</code>)</b><span class="persona-tag">Marco</span><p style="margin:4px 0 0;">Card impilate su mobile, griglia a 3 colonne da tablet in su.</p></div></div>
+    </div>
+  </section>
+
+  <footer>Fondamenti di Sistemi Web · AA 2025/26 — Documento di design, formato elettronico, pagina unica</footer>
+
+</div>
+</body>
+</html>
