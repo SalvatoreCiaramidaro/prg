@@ -127,7 +127,7 @@ const InfoView = {
 
 
 // ----- APPROFONDIMENTO MCP AVANZATO (pagina 2) -----
-// Seconda vista di approfondimento: trasporto, sicurezza e integrazione dei server MCP.
+// Seconda vista di approfondimento: ciclo di vita, trasporto e sicurezza di MCP.
 const Info2View = {
     template: `
         <section class="page-shell space-y-6">
@@ -139,61 +139,52 @@ const Info2View = {
 
             <div class="section-card rounded-2xl p-6 md:p-8 space-y-6">
                 <article>
-                    <h2 class="text-2xl font-semibold">1. Trasporto delle richieste</h2>
-                    <p class="mt-2">MCP definisce un modo ordinato per scambiare messaggi tra client e server. Questo aiuta a rendere prevedibile il flusso di richieste, risposte ed errori durante l'uso di strumenti esterni.</p>
-                    <ul class="info-list mt-3">
-                        <li><strong>Messaggi chiari:</strong> Ogni richiesta ha un obiettivo preciso.</li>
-                        <li><strong>Risposte strutturate:</strong> Il server restituisce dati leggibili e coerenti.</li>
-                        <li><strong>Gestione errori:</strong> I problemi vengono comunicati senza interrompere tutto il flusso.</li>
-                    </ul>
+                    <h2 class="text-2xl font-semibold">1. Ciclo di vita di una sessione MCP</h2>
+                    <p class="mt-2">Una sessione MCP non consiste solo nella chiamata di un tool: client e server devono prima stabilire come comunicare e quali capacità supportano.</p>
+                    <ol class="info-list mt-3">
+                        <li><strong>Inizializzazione:</strong> il client presenta la propria versione e le capacità disponibili.</li>
+                        <li><strong>Negoziazione:</strong> client e server verificano le funzionalità compatibili, come tool o resource.</li>
+                        <li><strong>Operatività:</strong> l'applicazione elenca le capacità e invia solo le richieste necessarie.</li>
+                        <li><strong>Chiusura:</strong> la sessione viene terminata quando il collegamento non è più necessario.</li>
+                    </ol>
                 </article>
 
                 <article>
-                    <h2 class="text-2xl font-semibold">2. Sicurezza e controllo del contesto</h2>
-                    <p class="mt-2">Uno dei vantaggi di MCP è che permette di controllare meglio quali informazioni vengono condivise con il modello. In questo modo l'applicazione può limitare il contesto ai dati davvero necessari e ridurre l'esposizione di informazioni sensibili.</p>
-                </article>
-
-                <article>
-                    <h2 class="text-2xl font-semibold">3. Confronto tra componenti MCP</h2>
-                    <div class="mt-4 overflow-hidden rounded-2xl border border-slate-200/70">
-                        <table class="table table-bordered table-striped mb-0">
-                            <caption>Elementi MCP, funzione e uso tipico</caption>
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col">Elemento MCP</th>
-                                    <th scope="col">Funzione</th>
-                                    <th scope="col">Uso tipico</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>Client</strong></td>
-                                    <td>Invia richieste e gestisce il dialogo.</td>
-                                    <td>Collegarsi a un server MCP per ottenere strumenti o dati.</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Server</strong></td>
-                                    <td>Espone capacità e risorse.</td>
-                                    <td>Pubblicare tool, documenti e prompt per l'applicazione.</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Host</strong></td>
-                                    <td>Orchestra l'esperienza complessiva.</td>
-                                    <td>Applicazione principale che controlla il contesto della sessione.</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Tool</strong></td>
-                                    <td>Esegue operazioni attive.</td>
-                                    <td>Ricerca, aggiornamento o automazione di un'attività.</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <h2 class="text-2xl font-semibold">2. Come viaggiano i messaggi</h2>
+                    <p class="mt-2">MCP separa il formato dei messaggi dal mezzo di trasporto. In questo modo la stessa logica può essere usata sia da un programma locale sia da un servizio remoto.</p>
+                    <div class="mt-4 grid gap-4 md:grid-cols-2">
+                        <div class="rounded-2xl border border-slate-200/70 bg-white/70 p-5">
+                            <h3 class="text-lg font-semibold">Server locale</h3>
+                            <p class="mt-2">Il trasporto <strong>stdio</strong> collega il client a un processo avviato sullo stesso computer, utile per lavorare con file o strumenti locali.</p>
+                        </div>
+                        <div class="rounded-2xl border border-slate-200/70 bg-white/70 p-5">
+                            <h3 class="text-lg font-semibold">Server remoto</h3>
+                            <p class="mt-2">Il trasporto basato su HTTP consente di raggiungere un server attraverso la rete, rendendo necessarie autenticazione, autorizzazioni e protezione del canale.</p>
+                        </div>
                     </div>
                 </article>
 
                 <article>
-                    <h2 class="text-2xl font-semibold">4. Integrazione nei progetti moderni</h2>
-                    <p class="mt-2">MCP si inserisce bene nei progetti moderni perché separa il modello dal dettaglio dell'integrazione. Così lo stesso assistente può cambiare dati o strumenti senza riscrivere ogni volta la logica di collegamento.</p>
+                    <h2 class="text-2xl font-semibold">3. Sicurezza e consenso dell'utente</h2>
+                    <p class="mt-2">MCP facilita l'integrazione, ma non rende automaticamente sicuro ciò che viene collegato. L'host deve mantenere il controllo sulle azioni che il modello può richiedere.</p>
+                    <ul class="info-list mt-3">
+                        <li><strong>Minimo privilegio:</strong> concedere a ogni server solo i dati e le operazioni indispensabili.</li>
+                        <li><strong>Consenso:</strong> chiedere conferma prima di azioni con effetti esterni, come modifiche o invii.</li>
+                        <li><strong>Validazione:</strong> controllare input, output e identità del server prima di usarne le capacità.</li>
+                        <li><strong>Tracciabilità:</strong> registrare le chiamate per poter ricostruire errori e comportamenti inattesi.</li>
+                    </ul>
+                </article>
+
+                <article>
+                    <h2 class="text-2xl font-semibold">4. Esempio: assistente collegato a un archivio</h2>
+                    <p class="mt-2">Immaginiamo un assistente che deve rispondere a una domanda sui piloti di Formula 1 presenti nel file JSON del progetto.</p>
+                    <div class="mt-4 grid gap-3 md:grid-cols-4">
+                        <div class="rounded-2xl border border-slate-200/70 bg-white/70 p-4"><strong>1. Domanda</strong><span class="block mt-1 text-sm">L'utente chiede un'informazione.</span></div>
+                        <div class="rounded-2xl border border-slate-200/70 bg-white/70 p-4"><strong>2. Scelta</strong><span class="block mt-1 text-sm">Il modello individua il tool di ricerca.</span></div>
+                        <div class="rounded-2xl border border-slate-200/70 bg-white/70 p-4"><strong>3. Controllo</strong><span class="block mt-1 text-sm">L'host autorizza e invia la richiesta.</span></div>
+                        <div class="rounded-2xl border border-slate-200/70 bg-white/70 p-4"><strong>4. Risposta</strong><span class="block mt-1 text-sm">Il risultato torna al modello come contesto.</span></div>
+                    </div>
+                    <p class="mt-4">Il vantaggio è la separazione: il modello interpreta la richiesta, il server conosce il dataset e l'host decide quali passaggi sono consentiti.</p>
                 </article>
             </div>
         </section>
