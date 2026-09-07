@@ -1,5 +1,7 @@
+/* Importa i caratteri usati per il testo corrente e per i titoli. */
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Lexend:wght@400;500;700&display=swap');
 
+/* Variabili condivise del tema chiaro. */
 :root {
     --bg-primary: #f7fafc;
     --bg-secondary: #ffffff;
@@ -22,6 +24,7 @@
     --success-bg: #e8f7ef;
 }
 
+/* Sovrascrive i colori quando l'elemento html ha il tema scuro attivo. */
 html[data-theme="dark"] {
     --bg-primary: #121826;
     --bg-secondary: #1d2740;
@@ -44,6 +47,7 @@ html[data-theme="dark"] {
     --success-bg: #223c34;
 }
 
+/* Impostazioni globali della pagina e sfondo decorativo. */
 html,
 body {
     height: 100%;
@@ -61,12 +65,14 @@ body {
     transition: background-color 0.25s ease, color 0.25s ease;
 }
 
+/* Layout verticale dell'applicazione Vue. */
 #app {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
+/* Animazione di ingresso applicata al contenuto principale. */
 main {
     flex: 1 0 auto;
     margin-bottom: 24px;
@@ -178,6 +184,7 @@ footer {
     border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
+/* Aspetto comune dei pannelli e delle card informative. */
 .card {
     background: linear-gradient(150deg, var(--bg-secondary) 0%, var(--bg-accent) 100%);
     color: var(--text-primary);
@@ -190,6 +197,7 @@ footer {
     color: var(--text-primary);
 }
 
+/* Stile condiviso per campi di testo e stati di focus. */
 .form-control,
 .input-group .form-control {
     background-color: var(--input-bg);
@@ -217,6 +225,7 @@ footer {
     color: #ffffff;
 }
 
+/* Pulsanti principali e pulsanti per modificare o eliminare un record. */
 .btn-primary,
 .btn-edit,
 .btn-delete {
@@ -281,6 +290,7 @@ footer {
     box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.24);
 }
 
+/* Struttura e colori delle tabelle dell'applicazione. */
 .tabella,
 .user-table,
 .table {
@@ -346,6 +356,7 @@ footer {
     color: var(--text-primary);
 }
 
+/* Elementi espandibili usati per mostrare contenuti aggiuntivi. */
 details {
     background-color: var(--bg-secondary);
     border: 1px solid var(--border-color);
@@ -401,6 +412,7 @@ summary {
     overflow-y: auto;
 }
 
+/* Spaziatura e selezione del testo per una lettura piu agevole. */
 body {
     line-height: 1.65;
 }
@@ -414,6 +426,7 @@ body {
     padding: 1.25rem 0 2.5rem;
 }
 
+/* Pannelli principali con effetto traslucido; il blocco seguente adatta lo sfondo al tema scuro. */
 .hero-panel,
 .section-card,
 .data-card {
@@ -542,6 +555,7 @@ summary:focus-visible {
     outline-offset: 2px;
 }
 
+/* Modalita di accessibilita attivabili dall'utente tramite classi sull'elemento html. */
 html.high-contrast {
     --bg-primary: #000000;
     --bg-secondary: #111111;
@@ -595,6 +609,7 @@ html.dyslexia-font * {
     font-family: 'Lexend', 'Trebuchet MS', sans-serif !important;
 }
 
+/* Riduce gli elementi della navigazione e del pannello accessibilita sui dispositivi piccoli. */
 @media (max-width: 991.98px) {
     .navbar-nav {
         margin-top: 10px;
@@ -632,7 +647,13 @@ html.dyslexia-font * {
         padding: 10px;
         font-size: 0.9rem;
     }
-}/* Variabili CSS globali: definiscono colori e parametri base del tema chiaro. */
+}
+
+/*
+ * Regole legacy mantenute per compatibilita con le viste precedenti.
+ * Le regole definite sopra hanno precedenza quando usano lo stesso selettore.
+ */
+/* Variabili CSS globali: definiscono colori e parametri base del tema chiaro. */
 :root {
     --bg-primary: #ffffff;
     --bg-secondary: #f8f9fa;
